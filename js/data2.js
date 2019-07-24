@@ -1,0 +1,21 @@
+{
+	"code":200,
+	"msg":"查询成功"，
+	"data":[
+		{
+			"userId":"1",
+			"userName":"zhangsan",
+			"password":"123"
+		},
+		{
+			"userId":"2",
+			"userName":"lisi",
+			"password":"123"
+		},
+		{
+			"userId":"3",
+			"userName":"wangwu",
+			"password":"123"
+		}
+	]
+}
