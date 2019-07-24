@@ -1,0 +1,346 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CHART</title>
+<style>
+	*{margin: 0;padding: 0;}
+	body{
+		width: 100%;
+		background: rgba(0,0,0,1.00);
+	}
+	.background{
+		width: 1500px;
+		background-color: rgba(0,0,0,1.00);
+		margin: 0 auto;
+	}
+	.T-col{color: aliceblue}
+	.nav-box{
+		position: fixed;
+		width: 1500px;
+		background-color: rgba(25,31,40,1.00);
+		color: aliceblue;
+		height: 87px;
+		line-height: 87px;
+	}
+	.nav-box ul{
+		padding-left: 40%;
+	}
+	.nav-box ul li{
+		float: left;
+		list-style: none;
+		font-size:16px;
+		margin-left: 50px;
+	}
+	.nav-box ul li a{
+		text-decoration: none;
+		color: aliceblue;
+	}
+	.nav-box ul a:hover{
+		color: red
+	}
+	.nav-box ul li a:hover{
+		color: rgba(211,13,44,1.00);
+	}
+	.form-row1{
+		background-color: rgba(14,19,24,1.00);
+		padding-top:100px;
+		display: flex;
+		box-sizing: border-box;
+	}
+	.form-row2{
+		background-color: rgba(14,19,24,1.00);
+		box-sizing: border-box;
+		display: flex;
+	}
+	.col4{
+		background-color: rgba(25,31,40,1.00);
+		margin: 25px;
+	}
+	.col8{
+		background-color: rgba(25,31,40,1.00);
+		margin: 38px;	
+	}
+	.item-box1{
+		width:479px;
+		height: 316px;
+	}
+	.item-box2{
+		width:1000px;
+	}
+	.item-con{
+		padding-bottom: 30px;
+	}
+	.item-con2{
+		margin:0;
+	}
+	.item-title{
+		font-size: 16px;
+		font-weight: 700;
+		padding-left: 16px;
+		padding-top: 16px;
+	}
+	.item-con{
+		margin: 50px;
+/*		width: ;*/
+	}
+	.row{
+		margin-top: 10px;
+	}
+	.key{
+		font-size: 16px;
+		margin-top: 0px;
+	}
+	.ipt{
+		width: 332px;
+		height: 34px;
+		background: none;
+		font-size: 16px;
+		border-radius: 5px;
+		padding-left: 5px;
+		color: aliceblue;
+		margin-top: 5px;
+		box-sizing: border-box;
+	}
+	.select{
+		background:none;
+		width: 332px;
+		height: 34px;
+		color: aliceblue;
+		font-size: 16px;
+		border: 0.2px solid rgba(255,255,255,1.00);
+	}
+	.option-bgc{
+		background-color: rgba(0,0,0,1.00);
+	}
+	.remark{
+		background: none;
+		width:700px;
+		height: 150px;
+		font-size: 16px;
+		color: aliceblue;
+		margin: 5px;
+		padding: 5px;
+	}
+	.remark-contaner{
+		display: flex;
+		
+	}
+	.water-data{
+		display: flex;
+		justify-content:space-around;
+		padding-bottom: 50px;
+	}
+	.box-a{
+		width:  800px;
+		margin: 0 auto;
+	}
+	.tip-contaner{
+		display: flex;
+		padding: 5px;
+	}
+	.btn{
+		width: 45px;
+		height: 30px; 
+		border-radius:5px;
+		font-size: 16px;
+	}
+	.DT{
+		width: 325px;
+		height: 34px;
+		background: none;
+		font-size: 16px;
+		border-radius: 2px;
+		padding-left: 5px;
+		color: aliceblue;
+		margin-top: 5px;
+		border: 1px solid rgba(255,255,255,1.00);
+	}
+	.face{
+		margin-top: 1%;
+		margin-left: 60%;
+		width: 55px;
+		height: 55px;
+		border-radius: 30px;
+	}
+	#tip{
+		color: aliceblue;
+		font-size: 18px;
+		line-height: 30px;
+		padding-left: 5px;
+	}
+	#dataBox{
+		padding-top: 10px;
+		color: aliceblue;
+		line-height: 25px;
+		font-size: 16px;
+	}
+/*	日期选择样式设置*/
+	::-webkit-inner-spin-button { visibility: hidden }    /*这是控制上下小箭头的*/
+	::-webkit-calendar-picker-indicator {      /*这是控制下拉小箭头的*/
+    border: 0.2px solid black;
+    border-radius: 2px;
+    box-shadow: ;
+    background-color: black;
+    background-image: -webkit-linear-gradient(top, none, none);
+    color:aliceblue;
+}
+	::-webkit-clear-button {}    /*控制清除按钮*/
+</style>
+</head>
+<body>
+<div class="background">
+<div class="nav-box">
+	<ul>
+		<li><a href="unit2.html">数据管理</a></li>
+		<li><a href="" style="background: rgba(255,255,255,1.00);color: black">养殖投放</a></li>
+<!--		<a href="head.html"><img class="face" src="img/face.png" alt="" /></a>-->
+		<a href="head.html" class="face" style="text-decoration: none;color: aliceblue">返回</a>
+	</ul>
+	
+</div>
+<div class="form-row1">
+		<div class="col4">
+			<div class="item-box1">
+				<div class="item-title"><p class="T-col">养殖资料</p></div>
+				<div class="item-con">
+					<div class="row small">
+						<div class="key"><p class="T-col">投放物种:</p></div>
+						<div class="val"><div class="select" id="select-demo1"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">养殖周期:</p></div>
+							<div class="val"><input type="text" class="ipt" id="ipt-week" name="feed-wek" placeholder="周"></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">投放时间:</p></div>
+						<div class="val"><div class="date-sel"><input type="date" id="ipt-time" class="DT"/></div></div>
+					</div>
+					
+					<div id="dataBox">
+					</div>
+					<button id="line11Btn" onclick="Btn11()" type="button" class="btn" style="margin-left: 80%">提交</button>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="col4">
+			<div class="item-box2">
+				<div class="item-title"><p class="T-col">水质监测</p></div>
+				<div class="box-a">
+				<div class="water-data">
+					<div class="item-con2">
+						<div class="row small">
+							<div class="key"><p class="T-col">时间:</p></div>
+							<div class="val"><div class="date-sel"><input type="date" id="water-check-time" class="DT"/></div></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">水色:</p></div>
+							<div class="val"><div class="select" id="select-waterColor"></div></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">水温:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder="℃"></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">溶解氧:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder="mg/L"></div>
+						</div>
+						</div>
+						<div class="item-con2">
+						<div class="row small">
+							<div class="key"><p class="T-col">盐度:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder="mg/L"></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">PH值:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder=""></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">氨氮:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder="mg/L"></div>
+						</div>
+						<div class="row small">
+							<div class="key"><p class="T-col">亚硝酸盐:</p></div>
+							<div class="val"><input type="text" class="ipt" placeholder="mg/L"></div>
+						</div>
+						<button id="line12Btn" onclick="submint()" type="button" class="btn" style="margin-left: 80%;margin-top: 10%;">提交</button>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="form-row2">
+		
+		<div class="col4">
+			<div class="item-box1">
+				<div class="item-title"><p class="T-col">投苗捕捞</p></div>
+				<div class="item-con">
+					<div class="row small">
+<!--						<div class="key"><p class="T-col">放养日期:</p></div>-->
+<!--						<div class="val"><div class="date-sel"><input type="date" class="DT"/></div></div>-->
+					</div>
+					<div class="row small">
+<!--						<div class="key"><p class="T-col">放养种类:</p></div>-->
+<!--						<div class="val"><div class="select" id="select-demo2"></div></div>-->
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">放养重量:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder="斤"></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">放养尾数:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder="尾"></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">苗种规格:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder=""></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">苗种来源:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder=""></div>
+					</div>
+					<div class="row small">
+<!--						<div class="key"><p class="T-col">起捕日期:</p></div>-->
+<!--						<div class="val"><div class="date-sel"><input type="date" class="DT"/></div></div>-->
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">收获重量:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder="斤"></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">收获尾数:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder="尾"></div>
+					</div>
+					<div class="row small">
+						<div class="key"><p class="T-col">销售何处:</p></div>
+						<div class="val"><input type="text" class="ipt" placeholder=""></div>
+					</div>
+					<button id="line21Btn" onclick="submint()" type="button" class="btn" style="margin-left:80%;margin-top: 5%">提交</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="col8">
+			<div class="item-box2">
+				
+				<div class="item-title"><p class="T-col">备注</p></div>
+					<div class="item-con">
+						<div class="row remark-contaner"><div class="key"><p class="T-col">添加备注:</p></div><div class="val"><textarea class="remark" placeholder="添加特殊记录，例如：检测人，记录员姓名，或其他导致数据偏差影响的因素。"></textarea></div></div>
+						<button class="btn" id="line22Btn" onclick="submint()" style="margin-left: 80%">提交</button>
+						<div class="row tip-contaner"><div class="key"><p class="T-col">养殖状态:</p></div><div class="val"><div id="tip" style="width:700px;height: 200px;border: solid 0.2px rgba(255,255,255,1.00);margin: 5px"></div></div></div>
+					</div>
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/form-sel.js"></script>

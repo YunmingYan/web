@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>InDetail</title>
+<style>
+	*{margin: 0;padding: 0}
+	body{width: 100%;background:url(images/inov-bg.jpg);clear: both}
+	#remove-canvas{}
+	#container{display: flex;margin-top: 12%;margin-left: 10%;}
+	#chart_nav li{height:16px;list-style: none;}
+	#chart_nav span{color: aliceblue}
+	#view{background:;margin-top: 6%;height:200px; border: 1px solid rgba(255,255,255,1.00);}
+	#view{width: auto;color: aliceblue;}
+	#back{color: aliceblue;width: 100%;height: 18px;font-size: 20px;margin: 10px;padding-left: 90%}
+	#back:hover{color: rgba(211,13,44,1.00);}
+	#data{padding: 5px;}
+</style>
+</head>
+
+<body>
+<div id="back">返回</div>
+<div id="container">
+   <!--传感器框-->
+
+	<div id="remove-canvas"><canvas id="canvas" width="900px" height="400px"></canvas></div>
+		<div id="chart_nav">
+			<span id="PH_span" onClick="Ph()">PH:</span>
+				<li onClick="Ph()" style="background: rgba(211,13,44,1.00)"></li>
+			<span id="Temp_span" onClick="Temp()">温度:</span>
+				<li onClick="Temp()" style="background: rgba(57,127,249,1.00)"></li>
+		</div>
+	<br/>	
+	<div id="view">
+		当前传感器数据：
+		<div><div id="data"></div></div>
+	</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/Chart.js"></script>
+<script type="text/javascript" src="js/setChart-big.js"></script>
+<script type="text/javascript" src="js/data.js"></script>

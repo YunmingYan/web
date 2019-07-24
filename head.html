@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>HEAD</title>
+<style>
+	
+	*{margin: 0;padding: 0;}
+	body{background:url(images/nav-bg.jpg.png) no-repeat center center;background-size:;}
+	#main{display: flex; margin-top: 43%;justify-content:space-around;max-width: 1250px;min-width: 1250px;}
+	#main div{width: 150px;height: 150px;}
+	#main div a img:hover{background-color:cyan;padding: 10px}
+	#nav-bg{background:rgba(39,190,236,1.00)}
+	#top-P{display: flex; position: fixed; margin: 10px 0 20px 0;padding: 0;top: 5px;font-size: 40px; font-family:"隶书"}
+	#nav{position: fixed;display: flex;width: 100%; height: 60px;top: 150px;}
+	#nav a li{width: 100%;display: flex;font-weight:500;font-size: 20px; line-height: 60px; text-align:center;}
+	#nav a{width: 20%;height:50px;color: rgba(255,255,255,1.00);text-decoration:none;display: block;}
+	#nav a li:hover{background:rgb(255, 82, 82); }
+/*	#poster{background:rgba(0,0,0,1.00);padding-top:50px;padding-left:30%}*/
+	.canterbox{margin: 0 auto;}
+	.canterbox a{text-decoration: none;text-align: center;display: block; width: 100%;height: 100%;}
+	.canterbox a p{color: black;text-align: center;}
+	.canterbox a p:hover{color: red;}
+	.contaner{margin: 0 auto 50px;max-width: 1350px;}
+</style>
+</head>
+
+<body>
+<div class="contaner" style="padding-top: ;">
+<div id="nav-bg" style="max-width: 1350px;margin-top: ;">
+	<div width="1350px" style="padding: 0 0 0 200px">
+		<div id="top-P">
+			<div><img src="images/schoollogo.png" alt="" width="130px" height="130px"></div>
+			<div><div height="100px" style="color: red;text-align: center;line-height: 70px;font-size: 50px">广东海洋大学</div>
+			<div style="color: aliceblue;font-size: 25px;padding: 0 50px;">GUANGDONG&nbsp;OCEAN&nbsp;UNIVERSITY</div></div>
+			<div height="30px" style="color: yellow;line-height: 120px;min-width: 500px;">广学明德&nbsp;海纳厚为</div>
+		</div>
+	</div>
+	<div width="1250px" height="30px" style="min-width: 1350px; position: fixed; top: 250px;padding-left: 450px;font-size: 60px;color:purple;font-family: webfont;max-width: 1350px;">智农物联团队</div>
+<div id="nav" style="max-width: 1200px;min-width: 1000px;padding-left: 25px;">
+	<a href="head.html" onClick="alert('这里就是主页了')"><li style="text-align: center;display: block">主页</li></a>
+	<a href="ckplayer.html"><li style="text-align: center;display: block">视频</li></a>
+	<a href="dataW.html"><li style="text-align: center;display: block">数据</li></a>
+	<a href=""><li style="text-align: center;display: block">切换用户</li></a>
+	<a href="index.html"><li style="text-align: center;display: block">退出</li></a>
+</div>
+</div>
+<!--
+<div id="poster">
+	<img src="images/" alt="" width="100%" height="100%">
+</div>
+-->
+<div id="main">
+<!--	<div class="canterbox"><a href="ckplayer.html"><img src="images/video.png" alt="video" title="" width="120px" height="100px"><p>视频</p></a></div>-->
+	
+	<div class="canterbox"><a href="ckplayer.html"><img src="images/video.png" alt="video" title="" width="100px" height="100px"><p>视频</p></a></div>
+	<div class="canterbox" ><a href="dataW.html"><img src="images/feelData.png" alt="control" title="" width="100px" height="100px"><p>数据</p></a></div>
+	<div class="canterbox"><a href="#"><img src="images/exit.png" alt="manage" title="" width="100px" height="100px"><p>切换用户</p></a></div>
+	<div class="canterbox"><a href="index.html"><img src="images/manage.png" alt="others" title="" width="100px" height="100px"><p>退出</p></a></div>
+</div>
+</div>
+</body>
+</html>
+
+<script>
+	window.scrollTo( 0, 1000 );
+
+	// 设置滚动行为改为平滑的滚动
+	window.scrollTo({ 
+		top: 1000, 
+		behavior: "smooth" 
+	});
+</script>

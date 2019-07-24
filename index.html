@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.inP{width: 260px;height: 35px;margin-top: 10px; border-radius: 7px;background: none;padding-left: 5px;color: #ffffff;}
+		.contaner div{width: 300px;}
+	</style>
+</head>
+
+<body style="background-color: #1b2c34;">
+	<div style="max-width: 1350px;height: 1000px; background: url(img/1.jpg) no-repeat;margin: 0 auto;">
+		<div style="height: 100px;"></div>
+		<div class="contaner" style="width: 300px;margin: 0 auto;">
+			<div><img src="images/schoollogo.png" width="80px" height="80px" style="display: block; margin: 0 auto;" alt=""></div>
+			<div style="font-family: '隶书'; font-size: 30px;color: #ffffff;text-align: center;">智慧农业管理系统</div>
+			<div>
+				<input name="userName" type="username" placeholder="请输入用户名" class="inP" style="padding-left: 35px; background: url('img/user.png') no-repeat 3px;background-size: 27px 27px;">
+			</div>
+			<div>
+				<input id="password" name="password" type="password" placeholder="请输入密码" class="inP" style="padding-left: 35px; background: url('img/password.png') no-repeat 3px;background-size: 27px 27px;">
+			</div>
+			<button id="submint" type="submit" style="width: 300px; height: 40px;border-radius: 7px;background-color: #f04f10;margin-top: 15px;color: #ffffff;">Sign in</button>
+			<a style="margin: 5px; font-size: 14px;text-decoration: none;" href="sign.html">注册新账号</a>
+		</div>
+
+	</div>
+</body>
+	<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/address.js"></script>
+	<script type="text/javascript" src="js/cookieUtil.js"></script>
+</html>
+<script>
+	var user = $("input[name=userName]");
+	var pass = $("input[name=password]");
+//	var userName = user.val();
+//	var password = pass.val();
+//	console.log(userName)
+//	console.log(password)
+
+	$('#submint').click(function(){
+		var userName= user.val();
+		var password = pass.val();
+//		console.log(userName)
+//		console.log(password)
+		if(user.val() == '' || pass.val() =='')
+			{
+				alert("用户名或密码不能为空~");
+			}
+		else if(userName == "admin" && password =="admin"){
+			window.location.href="head.html"
+
+		}
+		else{
+			$.ajax({
+				type:'POST',
+				url:'http://'+ A +'/user/login',
+				dataType:'JSON',
+				data:{
+					userName:userName,
+					password:password,
+				},
+				success:function(data){
+//					alert('success')
+//					console.log(data)
+					var code = data.code
+					var msg = data.msg
+					if(code===400){
+						alert(msg)
+					  }
+					else{
+//						console.log(data)
+						if(code===200){
+							console.log(data);
+							var userId = data.data.userId
+							console.log("userId："+ userId)
+							cookieUtil.unset("userId")
+							cookieUtil.set("userId",userId)
+							document.location.href="head.html"
+						   }
+					}
+
+				},
+				error:function(){
+					alert('用户名或密码错误')
+				}
+			});
+
+		}
+
+	});
+
+</script>

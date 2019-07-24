@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="M_Adnan">
+<title>MORE</title>
+<script src="./js/jquery.min.js"></script> 
+<link href="http://vjs.zencdn.net/5.5.3/video-js.css" rel="stylesheet">
+    <!-- If you'd like to support IE8 -->
+<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+<!--视频开关-->
+<link rel="stylesheet" type="text/css" href="./rs-plugin/rs-plugin/css/settings.css" media="screen" />
+<!--图表-->
+<script src="js/Chart.js"></script>
+<!-- Bootstrap Core CSS -->
+<!--右上按钮-->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="./css/ionicons.min.css" rel="stylesheet">
+<!--右上按钮排版-->
+<link href="./css/main.css" rel="stylesheet">
+<!--导航栏样式-->
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/responsive.css" rel="stylesheet">
+
+<!-- COLORS -->
+<link rel="stylesheet" id="color" href="./css/default.css">
+
+<!-- JavaScripts -->
+<script src="./js/modernizr.js"></script>
+<style>
+	/*用于水产养殖的水下机器人——仿生海龟*/
+	#title1{color:rgba(237,90,92,1.00);color:rgba(247,255,121,1.00);font-famil}
+	#wrap{background: rgba(0,0,0,1.00)}
+	#container{display: flex;margin-left: 8%;margin-top: 15%}
+	#PH_span{color: aliceblue}
+	#Temp_span{color: aliceblue}
+	#Nav_a{font-size: 18px}
+	#Nav_a:hover{color: rgba(211,13,44,1.00)}
+	#hourdata div:hover{background-color: red}
+</style>
+
+		
+</head>
+<body>
+
+<!-- Wrap -->
+<div id="wrap"> 
+  
+  <!-- header -->
+  <header class="header-normal">
+    <div class="sticky">
+      <div class="container"> 
+        <!-- Logo -->
+        <div class="logo"> <a href="index.html"><img class="img-responsive" src="images/schoollogo.png" alt="" width="80px"></a><font id="title1" face="verdana" size="+2">用于水产养殖的水下机器人——仿生海龟</font></div>
+        
+        <!-- Navigation -->
+        <nav class="navbar webimenu"> 
+          <!-- MENU BUTTON RESPONSIVE -->
+          <div class="menu-toggle"> <i class="fa fa-bars"> </i> </div>
+          <!-- NAV -->
+          <ul class="nav ownmenu">
+            <li class="active"><a href="unit2.html" id="Nav_a">返回</a>
+              <!--<ul class="dropdown animated-3s fadeIn">
+                <li> <a href="#">index 1</a> </li>
+                <li> <a href="#">index 2</a> </li>
+              </ul>-->
+            </li>
+<!--
+            <li> <a href="#">地图</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="map-on">开</a> </li>
+                <li> <a id="map-close">关</a> </li>
+              </ul>
+            </li>
+            <li> <a href="#">录制</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="record-on">开</a> </li>
+                <li> <a id="record-close">关</a> </li>
+              </ul>
+            </li>
+            <li> <a href="#">水泵</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="water-on">开</a> </li>
+                <li> <a id="water-close">关</a> </li>
+              </ul>
+            </li>
+            <li> <a href="#">传感器</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="feel-on">开</a> </li>
+                <li> <a id="feel-close">关</a> </li>
+              </ul>
+            </li>
+            <li> <a id="robot-restart">重启</a> </li>
+            <li> <a id="robot-close">关机</a> </li>
+-->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <!--======= HOME MAIN SLIDER =========-->
+  <section class="home-slider" style="background-color: black;margin-bottom: 100px;"> 
+    <!-- Slider Loader -->
+    <!--<div id="loader" class="hom-slie">
+      <div class="tp-loader spinner0"> 
+      	<span class="dot1"></span> 
+      	<span class="dot2"></span> 
+      	<span class="bounce1"></span> 
+      	<span class="bounce2"></span> 
+      	<span class="bounce3"></span> 
+      </div>
+    </div>-->
+    
+    <!-- SLIDE Start -->
+    <div class="" style="width: 100%">
+        <div class="" style="width: 1000px;margin: 0 auto;">
+           <div id="container" style="left:50px;top:200px; z-index: 200;">
+			   <!--传感器框-->
+			   
+				<div id="remove-canvas"><canvas id="canvas" width="500px" height="200px"></canvas></div>
+				<div id="chart_nav"><span id="PH_span" onClick="Ph()">PH:</span><li style=" width:24px; height:11px;background:rgba(237,90,92,1.00) " onClick="Ph()"></li><span id="Temp_span" onClick="Temp()">温度:</span><li style=" width:24px; height:11px;background:rgba(97,190,243,1.00) " onClick="Temp()"></li></div>
+<!--				<canvas id="canvas" width="600px" height="300px">				-->
+				<div style="width:210px;height:100%; top:230px; left:;padding:5px; background:rgba(208,208,208,1.00);  z-index: 200;">
+				当前传感器数据：
+				<div id="websocketData" style="width:200px;height:200px;z-index: 180;color: black;font-size: 15px;" ></div>
+			   	</div>
+           </div>
+			<div style="width: 1500px;display: flex;margin-top: 50px;margin-left: 8%">
+				<div id="remove-canvasB"><canvas id="canvasB" width="500px" height="200px" style=""></canvas></div>
+				<div id=""><span id="" style="color: aliceblue">PH:</span><li style=" width:24px; height:11px;background:rgba(220,220,220,0.8);"></li><span id="" style="color: aliceblue">温度:</span><li style=" width:24px; height:11px;background:rgba(97,190,243,0.8) " ></li></div>
+				<div style="border:1px solid black;height:100%; top:230px; left:;padding:5px; background:rgba(208,208,208,1);  z-index: 200;">
+				历史数据：
+				<div id="history" style="width:200px;height:200px;z-index: 180;color: black;font-size: 15px;" ></div>
+				</div>
+				<div id="hourdata" style="color: aliceblue">获取数据
+					<div id="" style="color:rgba(255,255,255,1.00);border-radius: 2px;" onClick="history()">获取历史数据</div>
+				</div>
+			</div>
+		</div>
+   </div>
+   
+  </section>
+  
+  <!-- Content -->
+  <!--<div id="content">--> 
+    
+    <!-- Welcome -->
+    <!--<section class="padding-top-150 padding-bottom-150">
+      <div class="container">-->
+        
+        <!-- Heading -->
+        <!--<div class="heading text-center">
+          <h4>What We Offer</h4>
+          <span>Creative Design</span>
+          <hr>
+        </div>-->
+        
+        <!-- OFFER -->
+        <!--<div class="offers"></div>-->
+          
+</div>
+</body>
+<!-- JavaScripts --> 
+<script src="./js/bootstrap.min.js"></script> 
+<script src="./js/own-menu.js"></script> 
+<script src="./js/jquery.lighter.js"></script> 
+<script src="./js/owl.carousel.min.js"></script> 
+<script src="./js/color-switcher.js"></script> 
+<script src="http://vjs.zencdn.net/5.5.3/video.js"></script>
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" src="./rs-plugin/rs-plugin/js/jquery.tp.t.min.js"></script> 
+<script type="text/javascript" src="./rs-plugin/rs-plugin/js/jquery.tp.min.js"></script> 
+<script src="./js/main.js"></script>
+<script type="text/javascript" src="./js/websocket.js"></script>
+<script type="text/javascript" src="js/setChart-big.js"></script>
+
+</html>

@@ -1,0 +1,495 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="M_Adnan">
+<title>HOME</title>
+<script src="./js/jquery.min.js"></script> 
+<link href="http://vjs.zencdn.net/5.5.3/video-js.css" rel="stylesheet">
+    <!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>
+<!--划动按钮核心代码-->
+<!--
+<script type="text/javascript" src="js/183.js"></script>
+<script type="text/javascript" src="js/simple.switch.min.js"></script>
+<link rel="stylesheet" href="css/simple.switch.three.css" type="text/css">
+-->
+<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+<!--视频开关-->
+<link rel="stylesheet" type="text/css" href="./rs-plugin/rs-plugin/css/settings.css" media="screen" />
+<!--图表-->
+<script src="js/Chart.js"></script>
+<!-- Bootstrap Core CSS -->
+<!--右上按钮-->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="./css/ionicons.min.css" rel="stylesheet">
+<!--右上按钮排版-->
+<link href="./css/main.css" rel="stylesheet">
+<!--导航栏样式-->
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/responsive.css" rel="stylesheet">
+
+<!-- COLORS -->
+<link rel="stylesheet" id="color" href="./css/default.css">
+
+<!-- JavaScripts -->
+<script src="./js/modernizr.js"></script>
+
+<!--<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>--->
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+	/*用于水产养殖的水下机器人——仿生海龟*/
+	#title1{color:rgba(237,90,92,1.00);color:rgba(247,255,121,1.00);font-family:;}
+/*	数据显示格式*/
+	#data li{
+		display: inline-block;
+		padding: 5px;
+		width:50px;
+	}
+	#chart_nav{
+		display:inline-block;
+		float: right;
+		color: aliceblue;
+		width: 40px;
+	}
+	#container{
+		display: flex;
+		width：100%;
+/*
+		border: 1px solid rgba(153,181,178,1.00);
+		padding: 15px 15px 5px 0px;
+*/
+	}
+	#video-div{
+		border: 1px solid rgba(153,181,178,1.00);
+	}
+	#PH_span:hover{color: rgba(237,90,92,1.00)}
+	#Temp_span:hover{color: rgba(97,190,243,1.00);}
+	#Nav_a{font-size: 16px;height: 10px; line-height: 1px}
+	#Nav_a:hover{color: rgba(255,59,59,1.00)}
+	.active{padding-top:10px;}
+	#data{}
+</style>
+<!--划动控件-->
+<style>
+    body, html {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        height: 100%;
+    }
+    .swiper-container {
+        width: 500px;
+        height: 300px;
+        margin: 50px auto;
+    }
+    .swiper-slide {
+        background: #f1f1f1;
+        color:#000;
+        text-align: center;
+        line-height: 300px;
+    }
+    </style>
+		
+</head>
+<body onkeydown="keyControl()">
+
+<!-- Wrap -->
+<div id="wrap"> 
+  
+  <!-- header -->
+  <header class="header-normal">
+    <div class="sticky">
+      <div class="container"> 
+        <!-- Logo -->
+        <div class="logo"> <a href="index.html"><img class="img-responsive" src="images/schoollogo.png" alt="" width="80px"></a><font id="title1" face="verdana" size="+2">用于水产养殖的水下机器人——仿生海龟</font></div>
+        
+        <!-- Navigation -->
+        <nav class="navbar webimenu"> 
+          <!-- MENU BUTTON RESPONSIVE -->
+          <div class="menu-toggle"> <i class="fa fa-bars"> </i> </div>
+          <!-- NAV -->
+          <ul class="nav ownmenu">
+				<li> <a href="#" style="font-size: 16px;">视频</a>
+				  <ul class="dropdown animated-3s fadeIn">
+					<li> <a id="video-on">开</a> </li>
+					<li> <a id="video-off">关</a> </li>
+				  </ul>
+				</li>
+				<li><a href="#" style="font-size: 16px;">照明</a>
+				  <ul class="dropdown animated-3s fadeIn">
+					<li> <a id="light-on">开</a> </li>
+					<li> <a id="light-off">关</a> </li>
+				  </ul>
+				</li>
+          	    <li> <a href="#" style="font-size: 16px">系统</a>
+					  <ul class="dropdown animated-3s fadeIn">
+						<li> <a id="State-on">开</a> </li>
+						<li> <a id="State-off">关</a> </li>
+					  </ul>
+            	</li>
+           	
+            	<li class="active"><a href="head.html" id="Nav_a">管理界面</a>
+<!--
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a href="#">index 1</a> </li>
+                <li> <a href="#">index 2</a> </li>
+              </ul>
+-->
+            </li>
+            
+<!--
+            <li> <a href="#" style="font-size: 16px">系统</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="water-on">开</a> </li>
+                <li> <a id="water-close">关</a> </li>
+              </ul>
+            </li>
+-->
+<!--
+            <li> <a href="#">传感器</a>
+              <ul class="dropdown animated-3s fadeIn">
+                <li> <a id="feel-on">开</a> </li>
+                <li> <a id="feel-close">关</a> </li>
+              </ul>
+            </li>
+            <li> <a id="robot-restart">重启</a> </li>
+            <li> <a id="robot-close">关机</a> </li>
+-->
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <!--======= HOME MAIN SLIDER =========-->
+  <section class="home-slider"> 
+    <!-- Slider Loader -->
+    <!--<div id="loader" class="hom-slie">
+      <div class="tp-loader spinner0"> 
+      	<span class="dot1"></span> 
+      	<span class="dot2"></span> 
+      	<span class="bounce1"></span> 
+      	<span class="bounce2"></span> 
+      	<span class="bounce3"></span> 
+      </div>
+    </div>-->
+    
+    <!-- SLIDE Start -->
+    <div class="tp-banner-container">
+        <div class="tp-banner">
+         <ul>
+          <!-- SLIDE  -->
+          <li data-transition="random" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" > 
+            <!-- MAIN IMAGE --> 
+            <img src="images/bg5.png" alt="slider"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat"> 
+            <!-- LAYERS --> 
+            
+            <!-- LAYER NR. 2 -->
+                      
+            <!-- LAYER NR. 2 -->
+                       
+            <!-- LAYER NR. 3 -->
+            <!-- LAYER NR. 4 -->
+            <div class="tp-caption lfb tp-resizeme" 
+                data-x="right" data-hoffset="-50" 
+                data-y="top" data-voffset="450" 
+                data-speed="800" 
+                data-start="2200" 
+                data-easing="Power3.easeInOut" 
+                data-elementdelay="0.1" 
+                data-endelementdelay="0.1" 
+                data-endspeed="300" 
+                data-scrolloffset="0"
+                style="z-index: 8;">
+                <a id="go-up" class="btn margin-right-10">上浮</a>
+                <a id="go-ahead" class="btn margin-right-10">前进</a>
+                <a id="go-down" class="btn margin-right-10">下沉</a> </div>
+            <div class="tp-caption lfb tp-resizeme" 
+                data-x="right" data-hoffset="-50" 
+                data-y="center" data-voffset="80" 
+                data-speed="800" 
+                data-start="2200" 
+                data-easing="Power3.easeInOut" 
+                data-elementdelay="0.1" 
+                data-endelementdelay="0.1" 
+                data-endspeed="300" 
+                data-scrolloffset="0"
+                style="z-index: 8;">
+                <a id="turn-left" class="btn margin-right-10">左转</a>
+                <a id="black-out" target="data" class="btn margin-right-10">停止</a>
+                <a id="turn-right" class="btn margin-right-10">右转</a> </div>
+            <div class="tp-caption lfb tp-resizeme" 
+                data-x="right" data-hoffset="-190" 
+                data-y="center" data-voffset="140" 
+                data-speed="800" 
+                data-start="2200" 
+                data-easing="Power3.easeInOut" 
+                data-elementdelay="0.1" 
+                data-endelementdelay="0.1" 
+                data-endspeed="300" 
+                data-scrolloffset="0"
+                style="z-index: 8;">
+<!--            <a id="open-up" class="btn margin-right-10">上停</a>-->
+                <a id="Backward" class="btn margin-right-10">后退</a>
+<!--            <a id="close-up" class="btn margin-right-10">下停</a>--></div>
+          </li>
+          
+<!--          <div id="video" style="width: 600px; height: 400px; "></div>-->         
+           <div id="video-div" style="position: absolute; float:left; top:120px; left:100px;width: 600px; margin:auto; background:; z-index: 200;">
+  				<iframe name="myiframe" frameborder="0" width="600px" style="height: 400px;" src="http://193.112.11.189:8080/player/sample/rtmp2.html"></iframe>
+<!--  				193.112.11.189:8080/player/sample/rtmp.html-->
+<!--
+               <source src="" id="video-src" type="rtmp/flv" >
+				<p class="vjs-no-js">
+				  <a href="http://videojs.com/html5-video-support/" target="_blank"></a>
+				</p>
+-->
+           </div>
+           
+           <div id="container" style="position: absolute;left:750px;top:200px; z-index: 200;">
+				<div class="swiper-container">
+					<div class="swiper-scrollbar"></div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">PH</div>
+						<div class="swiper-slide">温度</div>
+						<div class="swiper-slide">深度</div>
+						<div class="swiper-slide">电导率</div>
+						<div class="swiper-slide">氧化还原电位</div>
+						<div class="swiper-slide">溶解氧</div>
+						<div class="swiper-slide">电量</div>
+						<div class="swiper-slide">Slide 8</div>
+						<div class="swiper-slide">Slide 9</div>
+						<div class="swiper-slide">Slide 10</div>
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+           </div>
+		 </ul>
+		</div>
+   </div>
+  </section>
+  
+  <!-- Content -->
+  <!--<div id="content">--> 
+    
+    <!-- Welcome -->
+    <!--<section class="padding-top-150 padding-bottom-150">
+      <div class="container">-->
+        
+        <!-- Heading -->
+        <!--<div class="heading text-center">
+          <h4>What We Offer</h4>
+          <span>Creative Design</span>
+          <hr>
+        </div>-->
+        
+        <!-- OFFER -->
+        <!--<div class="offers"></div>-->
+          
+</div>
+</body>
+<!-- JavaScripts --> 
+<script src="./js/bootstrap.min.js"></script> 
+<script src="./js/own-menu.js"></script> 
+<script src="./js/jquery.lighter.js"></script> 
+<script src="./js/owl.carousel.min.js"></script> 
+<script src="./js/color-switcher.js"></script> 
+<!--<script src="http://vjs.zencdn.net/5.5.3/video.js"></script>-->
+<!-- SLIDER REVOLUTION 4.x SCRIPTS  --> 
+<script type="text/javascript" defer="defer" src="./rs-plugin/rs-plugin/js/jquery.tp.t.min.js"></script> 
+<script type="text/javascript" defer="defer" src="./rs-plugin/rs-plugin/js/jquery.tp.min.js"></script> 
+<script src="./js/main.js"></script>
+<script src="./js/setEvent.js"></script>
+<script type="text/javascript" defer="defer" src="./js/websocket.js"></script>
+<!--<script type="text/javascript" defer="defer" src="js/setChart.js"></script>s-->
+<script type="text/javascript" defer="defer" src="js/keyControl.js"></script>
+<!--ckplayer-->
+<script type="text/javascript" src="js/ckplayer.js"></script>
+<!--Rtmp数据获取-->
+<!--<script type="text/javascript" src="js/RtmpData.js"></script>-->
+</html>
+<!--视频&照明开关-->
+<script type="text/javascript">
+	$('#video-on').click(function(){
+//		console.log('#video-src'.src)
+//		alert('video-on')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=Camera&value=1&admin=1',
+			dataType:'JSON',
+			data:{
+				
+		},succeed:{
+//			alert('video-on')
+		},error:{
+			  
+		},
+		});
+	});
+	$('#video-off').click(function(){
+//		alert('video-off')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=Camera&value=0&admin=1',
+			dataType:'JSON',
+			data:{
+		},succeed:{
+			
+		},error:{
+			  
+		},
+		});
+	});
+	$('#light-on').click(function(){
+//		alert('light-on')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=LED&value=1&admin=1',
+			dataType:'JSON',
+			data:{
+		},succeed:{
+			
+		},error:{
+
+		},
+		});
+	});
+	$('#light-off').click(function(){
+//		alert('light-off')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=LED&value=0&admin=1',
+			dataType:'JSON',
+			data:{
+		},succeed:{
+			
+		},error:{
+			  
+		},
+		});
+	});
+	$('#State-on').click(function(){
+//		alert('light-off')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=State&value=1&admin=1',
+			dataType:'JSON',
+			data:{
+			
+		},succeed:{
+			
+		},error:{
+			  
+		},
+		});
+	});
+	$('#State-off').click(function(){
+//		alert('light-off')
+		$.ajax({
+			tepe:"GET",
+			url:'http://193.112.11.189:8888/device/openOff?name=State&value=0&admin=1',
+			dataType:'JSON',
+			data:{
+
+		},succeed:{
+			
+		},error:{
+			  
+		},
+		});
+	});
+</script>
+
+<!--rtmp数据-->
+<script>
+	window.onload=function(){
+	var AppKey = '952b321600b3453fae7d5435e7e29da2'
+	var Secret = 'ae1e6b8f0be161939f3bd9ed5d7656b3'
+	$.ajax({
+		type:'POST',
+		url:'https://open.ys7.com/api/lapp/token/get?',
+		dataType:'JSON',
+		data:{
+			appKey:AppKey,
+			appSecret:Secret,
+		},
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		success: function(data){
+//				console.log(data)
+				var accessToken = data.data.accessToken
+//				console.log(accessToken)
+				$.ajax({
+					type:'POST',
+					url:'https://open.ys7.com/api/lapp/live/video/list?',
+					dataType:'JSON',
+					data:{
+						accessToken:accessToken,
+					},
+					success: function(data){
+//						console.log(data)
+						var rtmp = data.data[0].rtmp;
+						console.log(rtmp);
+						var videoObject = {
+							container: '#video', //容器的ID或className
+							variable: 'player',//播放函数名称
+							autoplay:false,
+							live:true,
+//							video: rtmp,
+							video:'rtmp://rtmp.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b',
+						};
+						var player = new ckplayer(videoObject);
+				},
+				});
+		},
+		error:{
+			
+		},
+	});
+};
+</script>
+<!--划动控件-->
+ <script src="js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper({
+            el: '.swiper-container',
+            initialSlide: 2,
+            spaceBetween: 50,
+            slidesPerView: 2,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            grabCursor: true,
+            scrollbar: {
+              el: '.swiper-scrollbar',
+            },
+            mousewheel: {
+              enabled: true,
+            },
+            keyboard: {
+              enabled: true,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>

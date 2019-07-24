@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ckplayer</title>
+		<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+		<style type="text/css">
+			body{margin:0;padding:0px;font-family:"Microsoft YaHei",YaHei,"微软雅黑",SimHei,"黑体";font-size:14px}
+			.btn div:hover{background-color:rgba(63,240,87,1.00)}
+		</style>
+	</head>
+
+	<body style="background-color:rgba(188,183,183,1.00)">
+		
+		<div style="width: 600px;margin: 0 auto;">
+			<div id="video" style="width: 600px; height: 400px;margin: 0 auto;"></div>
+			<div class="btn" style="display: flex;">
+					<div id="back" style="width: 300px;border: 1px solid black">
+						<img src="./img/back.png" alt="" width="35px" height="35px" style="display: block;margin: 5px auto;">
+					</div>
+				<div id="reflash" style="width: 300px;border: 1px solid black">
+					<img src="./img/reflash.png" alt="" width="35px" height="35px" style="display: block;margin: 5px auto;">
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="ckplayer/ckplayer.js"></script>
+		<script type="text/javascript">
+			var rtmp = '';
+			var appKey='231fa5f4982e4d1cb5d2aeb03026b2a7';
+			var appSecret='8960216eef839d38527aa725493c7c43';
+			var accessToken='';
+		//	alert('step1')
+			$.ajax({
+				type:'POST',
+				async:false,
+				url:'https://open.ys7.com/api/lapp/token/get',
+				data:{
+					appKey:appKey,
+					appSecret:appSecret,
+				},
+				success:function(data){
+					console.log('获取accessToken')
+					console.log(data)
+					var access = data.data.accessToken
+					accessToken = access
+		//			console.log(accessToken)
+				},
+				error:function(data){
+					var msg = data.msg
+					console.log(msg)
+				},
+			});
+			console.log('得到accessToken：')
+			console.log(accessToken)
+
+			$.ajax({
+				type:'POST',
+				async:false,
+				url:'https://open.ys7.com/api/lapp/live/video/list',
+				dataType:'JSON',
+				data:{
+					accessToken:accessToken,
+				},
+				success:function(data){
+					console.log('获取rtmp地址：')
+					console.log(data)
+					rtmp = 'rtmp://rtmp.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd'
+				},
+				error:function(data){
+
+				},
+			});
+		//	console.log(rtmp)
+//			$('#video')[0].src = rtmp
+//			var player = new EZuikit.EZUIPlayer('myPlayer');
+
+			
+			
+			
+			
+			
+			var videoObject = {
+				container: '#video', //容器的ID或className
+				variable: 'player',//播放函数名称
+				autoplay:false,
+				live:true,
+				video: rtmp,
+			};
+			var player = new ckplayer(videoObject);
+		</script>
+		
+		<script>
+			$('#back').click(function(){
+				window.location.href='head.html'
+			});
+			$('#reflash').click(function(){
+				window.location.href='ckplayer.html'
+			});
+		</script>
+	</body>
+
+</html>

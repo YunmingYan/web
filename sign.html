@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+	<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+<title>注册账号</title>
+	<style>
+		.cycle{border-radius: 50%}
+		.container{margin: 0 auto;}
+	</style>
+</head>
+
+<body>
+	<div class="container" style="background-color: #fbfbfb">
+		<div class="container" style="width: 350px;height: 300px;border: 1px solid rgba(0,0,0,0.10);background-color: ;margin-top: 100px;">
+			<div class="container" style="width: 250px;margin: 100px auto 0; background-color: #FFFFFF">
+				<a href="index.html"><img style="display: block;margin-top: -125px;" class="container" src="./img/logo-icon.png" alt="" width="60px"></a>
+
+				<div class="container" width="">
+					<div style="text-align: center;color: rgba(124,168,231,1.00);font-size: 20px;">Sign in to continue</div>
+					<div class="container" width="500px" style="padding: 5px;text-align: ;">
+						<div>账号</div>
+						<input id="user" name="userName" type="text" style="width: 230px;height: 23px;border-radius: 3px;margin-top: 5px;padding-left: 5px;">
+						<div>密码</div>
+						<input id="pass" name="password" type="password" style="width: 230px;height: 23px;border-radius: 3px;margin-top: 5px;padding-left: 5px;"><br/>
+					</div>
+					<button id="btn" type="submit" style="margin: 5px;width: 50px;height: 25px;border-radius: 3px;background-color: #44a0b3;color: #FFFFFF" onclick="">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	var user = $("input[name=userName]");
+	var pass = $("input[name=password]");
+	$('#btn').click(function (){
+//		alert('ok')
+		var userName = user.val();
+		var password = pass.val();
+//		alert(userName)
+//		alert(password)
+		$.ajax({
+			type:'',
+			url:'',
+			dataType:'JSOn',
+			data:{
+				
+			},
+			success:function(data){
+				document.location.href='index.html'
+			},
+			error:function(data){
+				alert('error');
+			}
+		})
+		
+	})
+</script>

@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Control</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/swiper.min.css">
+<style>
+	*{margin: 0;padding: 0;}
+	body{background: black;}
+	.box{
+		background: black;
+		width: 1520px;
+		height: 70px;
+		margin: 0px auto;
+/*		border: 1px solid #888;*/
+	}
+	.box2{
+		background-color: #2e2e3d;
+		height: 650px;
+	}
+	.box ul{
+		float: left;
+		width: 500px;
+	}
+	.nav,.tnav{
+		list-style-type: none;
+		padding-left:;
+	}
+	.nav li{
+		float: left;
+		line-height: 20px;
+		margin: 0;
+	}
+	.nav li a{
+/*		display: inline-block;*/
+		width: 100px;
+		height: 70px;
+		padding-top: 20px;
+		text-decoration: none;
+		color:aliceblue;
+	}
+	.nav{
+		margin-right: 100px;
+	}
+	.tnav{
+		display: none;
+		position: absolute;
+	}
+	.tnav li{
+		float: none;
+		padding-left: 10px;
+		line-height: 40px;
+		width: 200px;
+		height: 40px;
+	}
+	.tnav li a{
+		
+	}
+	.nav li:hover .tnav{display: block;}
+	.tnav li:hover{background-color: #1cd1aa}
+	.navT{padding: 25px;}
+	.navT_div{background-color: #1494aa;width: 40px;height: 30px;border-radius: 5px; padding-top: 9px;padding-left: 7px;}
+	.arguments div{width: 50px; margin: 0 10px;line-height: 35px;border-radius: 5px;text-align: center; background-color:#1494aa; }
+	.arguments div:hover{background-color: red;color: black;}
+</style>
+<!--控制按钮-->
+<style>
+	.control{
+		display: flex;
+		list-style: none;
+	}
+	.control a{
+		border: 1px solid rgba(255,255,255,1.00);
+		display: block;
+		width: 100px;
+		height: 45px;
+		background-color:;
+		text-decoration: none;
+		color: white;
+		margin: 5px 10px;
+		text-align: center;
+		line-height: 45px;
+		border-radius: 30px;
+	}
+	.control a:hover{
+		background-color:#77fff7;
+		color: black;
+	}
+</style>
+<!--图表-->
+<style>
+	.hover-chart a{
+		text-decoration: none;
+		display: block;
+		width: 40px;
+		height: 40px;
+		border-radius: 40px;
+		color: black;
+		background-color: #badbdd;
+		text-align: center;
+		line-height: 40px;
+		margin: 5px 15px;
+	}
+	.hover-chart a:hover{
+		background-color: #77fff7;
+	}
+</style>
+
+</head>
+
+<body>
+<div class="contaner" style="margin-left: 0px;">
+	<div class="box">
+		<ul style="display: flex;width: 520px; padding-left: 100px">
+			<div><img src="images/schoollogo.png" alt="" width="83px" height="83px"></div>
+			<div style="width: 800px;height: 70px;color: yellow;line-height: 85px;font-size: 23px;margin-left: 10px;">面向水产养殖的物联网仿生海龟</div>
+		</ul>
+		<ul class="nav" style="padding-left: 300px;">
+			<li class="navT"><div class="navT_div"><a href="BaiduMap.html" target="_blank">地图</a></div></li>
+			<li class="navT"><div class="navT_div"><a href="#">视频</a></div>
+				<ul class="tnav">
+					<li id="video-on"><a href="#">开</a></li>
+					<li id="video-off"><a href="#">关</a></li>
+				</ul>
+			</li>
+			<li class="navT"><div class="navT_div"><a href="#" class="navT_1">照明</a></div>
+				<ul class="tnav">
+					<li id="light-on"><a href="#">开</a></li>
+					<li id="light-off"><a href="#">关</a></li>
+				</ul>
+			</li> 
+			<li class="navT"><div class="navT_div"><a href="#" class="navT_1">系统</a></div>
+				<ul class="tnav">
+					<li id="State-on"><a href="#">开</a></li>
+					<li id="State-off"><a href="#">关</a></li>
+				</ul>
+			</li>
+			<li class="navT"><div class="navT_div"><a href="head.html" class="navT_1">返回</a></div></li>
+		</ul>
+	</div>
+	<div class="box2" style="width: 1520px;display: flex;">
+		<div style="width: 600px;height: 400px;margin: 100px 100px">
+			<iframe id="video" frameborder="0" width="700px" height="400px" src=""></iframe>
+		</div>
+		<div style="width: 600px;height: 400px;margin-top: 80px;margin-left: 70px;">
+<!--			<div style="width: 300px;height: 300px;border-radius: 300px;margin-left: 100px;padding-top: px; background:linear-gradient(to bottom right, red, #aa1493,#9014aa,#3714aa,#143baa,#1490aa,#14aa73,#1faa14,#93aa14,#aa7714,#aa3e14,red, #aa1493,#9014aa,#3714aa,#143baa,#1490aa,#14aa73,#1faa14,#93aa14,#aa7714,#aa3e14)">-->
+			<div style="width: 230px;height: 230px;border-radius: 230px;margin-left: 135px;background:linear-gradient(to bottom right,white,#1494aa)">
+				<div style="float: left; width: 200px;height: 200px;border-radius: 200px;margin-left: 15px;margin-top: 15px; background: #2e2e3d">
+					<div id="data_container">
+						<div id="power_pu" style="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display: block;"></div>
+						<div id="oo_pu" style="display: none;"></div>
+						<div id="ph_pu" style="display: none;"></div>
+						<div id="depth_pu" style="display: none;"></div>
+						<div id="temp_pu" style="display: none;"></div>
+						<div id="con_pu" style="display: none;"></div>
+						<div id="orp_pu" style="display: none;"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div style="display: flex;">
+				<div>
+					<div id="" style="color: #ffffff; display: flex;">
+						定深：<div id="rangeDepthDiv" style="font-size: 20px;margin-right: 5px;">0</div>
+					</div>
+					<input id="rangeDepth" type="range" min="0" max="300">
+				</div>
+				<div style="margin-left: 200px;">
+					<div id="" style="color: #ffffff; display: flex;">
+						定速：<div id="rangeSpeedDiv" style="font-size: 20px;margin-right: 5px;">0</div>
+					</div>
+					<input id="rangeSpeed" type="range" min="0" max="100">
+				</div>
+			</div>
+			
+			<div class="arguments" style="width: 500px; height: 35px;margin-top: 20px;color: aliceblue;display: flex;">
+				<div id="power">电量</div>
+				<div id="ph">PH</div>
+				<div id="depth">深度</div>
+				<div id="temp">温度</div>
+				<div id="con">氨氮</div>
+				<div id="orp">浊度</div>
+				<div id="oo">溶氧</div>
+			</div>
+			<div style="width: 500px;height: 400px;margin: 20px auto auto 65px;">
+				<div class="control" style="display: flix;">
+					<li><a href="#" id="up">上浮</a></li>
+					<li><a href="#" id="forward">前进</a></li>
+					<li><a href="#" id="down">下沉</a></li>
+				</div>
+				<div class="control" >
+					<li><a href="#" id="left">左转</a></li>
+					<li><a href="#" id="stop">停</a></li>
+					<li><a href="#" id="right">右转</a></li>
+				</div>
+				<div class="control">
+					<li style="margin-left: 120px"><a href="#" id="back">后退</a></li>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="highChartContainerPower" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartClosePower" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartPower" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerPh" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartClosePh" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartPh" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerDepth" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartCloseDepth" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartDepth" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerTemp" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartCloseTemp" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartTemp" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerCon" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartCloseCon" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartCon" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerOrp" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartCloseOrp" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartOrp" style="width:1200px;height:400px;"></div>
+</div>
+<div id="highChartContainerOo" style="position: fixed;top: 100px;left: 100px;display: none;">
+	<p id="highChartCloseOo" style="background-color: aliceblue;width: 1200px;text-align: right;padding: 10px">关闭</p>
+	<div id="highChartOo" style="width:1200px;height:400px;"></div>
+</div>
+<!--<div id="test" style="color: aliceblue;">测试</div>-->
+</body>
+</html>
+<script type="text/javascript" src="js/address.js"></script>
+<script type="text/javascript" src="js/cookieUtil.js"></script>
+<script type="text/javascript" src="js/event.js"></script>
+<!--<script type="text/javascript" src="js/suspension.js"></script>-->
+<!--<script type="text/javascript" src="js/keyControl.js"></script>-->
+<script type="text/javascript" src="js/websocket.js"></script>
+<script type="text/javascript" src="js/highcharts.js"></script>
+<script type="text/javascript" src="js/databin.js"></script>
+<!--<script type="text/javascript" src="js/swiper.m
+in.js"></script>-->
+<script type="text/javascript">
+var ph = document.getElementById('ph_pu')
+var temp = document.getElementById('temp_pu')
+var depth = document.getElementById('depth_pu')
+var con = document.getElementById('con_pu')
+var orp = document.getElementById('orp_pu')
+var oo = document.getElementById('oo_pu')
+var power = document.getElementById('power_pu')
+var highChartContainer = document.getElementById('highChartContainer')
+var phCss = document.getElementById('ph')
+var tempCss = document.getElementById('temp')
+var depthCss = document.getElementById('depth')
+var conCss = document.getElementById('con')
+var orpCss = document.getElementById('orp')
+var ooCss = document.getElementById('oo')
+var powerCss = document.getElementById('power')
+$('#test').click(function(){
+	highChartContainer.style.cssText="position: fixed;top: 100px;left: 100px;display:block;"
+});
+ $('#ph').click(function(){
+	phCss.style.cssText="background-color:red;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:;"
+	
+	ph.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block"
+	temp.style.cssText="display:none"
+	depth.style.cssText="display:none"
+	con.style.cssText="display:none"
+	orp.style.cssText="display:none"
+	oo.style.cssText="display:none"
+	power.style.cssText="display:none"
+ })
+$('#power').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:red;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="display:none"
+	depth.style.cssText="display:none"
+	con.style.cssText="display:none"
+	orp.style.cssText="display:none"
+	oo.style.cssText="display:none"
+	power.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block" })
+$('#depth').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:red;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="display:none"
+	depth.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block"
+	con.style.cssText="display:none"
+	orp.style.cssText="display:none"
+	oo.style.cssText="display:none"
+	power.style.cssText="display:none" })
+$('#con').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:red;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="display:none"
+	depth.style.cssText="display:none"
+	con.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block"
+	orp.style.cssText="display:none"
+	oo.style.cssText="display:none"
+	power.style.cssText="display:none" })
+$('#orp').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:red;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="display:none"
+	depth.style.cssText="display:none"
+	con.style.cssText="display:none"
+	orp.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 60px;font-family:;display:block"
+	oo.style.cssText="display:none"
+	power.style.cssText="display:none" })
+$('#oo').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:red;"
+	powerCss.style.cssText="background-color:;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="display:none"
+	depth.style.cssText="display:none"
+	con.style.cssText="display:none"
+	orp.style.cssText="display:none"
+	oo.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block"
+	power.style.cssText="display:none" })
+$('#temp').click(function(){
+	phCss.style.cssText="background-color:;"
+	tempCss.style.cssText="background-color:red;"
+	depthCss.style.cssText="background-color:;"
+	conCss.style.cssText="background-color:;"
+	orpCss.style.cssText="background-color:;"
+	ooCss.style.cssText="background-color:;"
+	powerCss.style.cssText="background-color:;"
+	
+	
+	ph.style.cssText="display:none"
+	temp.style.cssText="width: 200px;height: 200px;border-radius: 200px;color: aliceblue;background: #2e2e3d;text-align: center;line-height: 200px;font-size: 70px;font-family:;display:block"
+	depth.style.cssText="display:none"
+	con.style.cssText="display:none"
+	orp.style.cssText="display:none"
+	oo.style.cssText="display:none"
+	power.style.cssText="display:none" })
+
+
+
+$('#highChartClosePower').click(function(){
+	highChartContainerPower.style.cssText="display:none;"
+});
+$('#highChartClosePh').click(function(){
+	highChartContainerPh.style.cssText="display:none;"
+});
+$('#highChartCloseTemp').click(function(){
+	highChartContainerTemp.style.cssText="display:none;"
+});
+$('#highChartCloseDepth').click(function(){
+	highChartContainerDepth.style.cssText="display:none;"
+});
+$('#highChartCloseOrp').click(function(){
+	highChartContainerOrp.style.cssText="display:none;"
+});
+$('#highChartCloseCon').click(function(){
+	highChartContainerCon.style.cssText="display:none;"
+});
+$('#highChartCloseOo').click(function(){
+	highChartContainerOo.style.cssText="display:none;"
+});
+</script>
+
+<script>
+//键盘控制
+	function keyDown(){
+		var deviceId = cookieUtil.get("deviceId")
+//		alert('success')
+//		console.log(event.keyCode)
+		if(event.keyCode===87){
+//		   alert('success');
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Forward&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===65){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Left&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===83){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Stop&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===68){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Right&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===81){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Up&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===69){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Down&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}else if(event.keyCode===88){
+			$.ajax({
+				type:'GET',
+				url:'http://'+ A + '/device/move?direction=Backward&value=1&admin=1&deviceId="'+deviceId+'"',
+				dataType:'JSON',
+				success:function(data){
+				var code = data.code
+				var msg = data.msg
+				if(code===400){
+					alert(msg)
+			}
+			}
+			})
+		}
+
+
+	}
+	document.onkeydown = keyDown;
+</script>
+
+<script>
+var videoAddress = "shipingdizhi"
+window.onload=function(){
+	console.log("准备获取视频地址")
+	var deviveId = cookieUtil.get("deviceId")
+	console.log("检测设备成功："+deviveId);
+	if(deviveId === "201104828"){
+		console.log("当前设备：haigui1")
+		videoAddress = "view/JDK/demo/haigui1-rtmp.html";
+		$('#video').attr('src',videoAddress);
+	}
+	else if(deviveId === "231608256"){
+		console.log("当前设备：haigui2")
+		videoAddress = "view/JDK/demo/haigui2-monitor.html";
+		$('#video').attr('src',videoAddress);
+	}
+
+
+var swiperAddress = "view/Swiper/playground/index.html";
+//$('#video').attr('src',videoAddress);
+$('#swiper').attr('src',swiperAddress);
+
+};
+</script>
+<script>
+$(function(){  
+  
+    var currentValue = $('#rangeDepthDiv');  
+  
+    $('#rangeDepth').change(function(){
+        currentValue.html(this.value);
+		var deviceId = cookieUtil.get("deviceId");
+//		alert(deviceId)//201104828
+		var rangeDepth = this.value
+		$.ajax({
+			type:'GET',
+			url:'http://'+ A +'/device/moveToDepth',
+			dataType:'JSON',
+			data:{
+				deviceId:deviceId,
+				depth:rangeDepth,
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(data){
+				console.log('error：深度值为'+rangeDepth)
+			}
+			
+		})
+    });
+	
+	var currentValue2 = $('#rangeSpeedDiv');  
+  
+    $('#rangeSpeed').change(function(){
+        currentValue2.html(this.value);
+		var deviceId = cookieUtil.get("deviceId");
+//		alert(deviceId)//201104828
+		var rangeSpeed = this.value
+		$.ajax({
+			type:'GET',
+			url:'http://'+ A +'/device/changeSpeed',
+			dataType:'JSON',
+			data:{
+				deviceId:deviceId,
+				speed:rangeSpeed,
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(data){
+				console.log('error：深度值为'+rangeSpeed)
+			}
+			
+		})
+    });
+  
+    // Trigger the event on load, so  
+    // the value field is populated:  
+  
+    $('#rangeSpeed').change();  
+  
+}); 
+</script>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DATA</title>
+<style>
+	*{margin: 0;padding: 0;}
+	body{
+		background: rgba(0,0,0,1.00);
+	}
+	.background{
+		width: 1600px;
+		background-color: rgba(0,0,0,1.00);
+		margin: 0 auto;
+	}
+	.nav-box{
+		position: fixed;
+		width: 1600px;
+		background-color: rgba(25,31,40,1.00);
+		color: aliceblue;
+		height: 87px;
+		line-height: 87px;
+	}
+	.main{
+		padding-top: 87px;
+	}
+	.nav-box ul{
+		padding-left: 40%;
+	}
+	.nav-box ul li{
+		float: left;
+		list-style: none;
+		font-size:16px;
+		margin-left: 50px;
+	}
+	.nav-box ul li a{
+		text-decoration: none;
+		color: aliceblue;
+	}
+	.nav-box ul li a:hover{
+		color: rgba(211,13,44,1.00);
+	}
+	.nav-box ul a:hover{
+		color: red
+	}
+	.face{
+		margin-top: 1%;
+		margin-left: 53%;
+		width: 55px;
+		height: 55px;
+		border-radius: 30px;
+	}
+	
+	.contaner1{
+		width: 100%;
+		display: flex;
+		justify-content:center;
+	}
+	.contaner1 div{
+		width: 31%;
+		float:left;
+		margin: 50px 25px 0;
+		padding: 50px;
+		color: aliceblue;
+		background-color: rgba(25,31,40,1.00);
+	}
+	.contaner1 div canvas{
+		display: block;
+		margin: 0 auto;
+	}
+	.contaner2{
+		width: 100%;
+		display: flex;
+		justify-content:center;
+		margin-top: 50px;
+	}
+	.contaner2 div{
+		width: 47%;
+		display: block;
+		margin: 0 auto;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		background-color: rgba(25,31,40,1.00);
+		color: aliceblue;
+		padding-left:10px; 
+	}
+	.contaner2 div canvas{
+		display: block;
+		margin: 0 auto;
+	}
+	.contaner2 div a{
+		color: aliceblue;
+		text-decoration: none;
+	}
+	.contaner2 div a:hover{
+		color: red;
+	}
+</style>
+</head>
+<body>
+<div class="background">
+<div class="nav-box">
+	<ul>
+		<li><a href="" style="background: rgba(255,255,255,1.00);color: black">数据管理</a></li>
+		<li><a href="unit1.html">养殖投放</a></li>
+<!--		<a href="head.html"><img class="face" src="img/face.png" alt="" /></a>-->
+		<a href="head.html" class="face" style="text-decoration: none;color: aliceblue">返回</a>
+	</ul>
+</div>
+<div class="main">
+	<div class="contaner1">
+		<div>比例(虾:Red&罗非鱼:Blue&蜡鱼:Yellow)<canvas id="canvasA" width="200px" height="200px"></canvas></div>
+		<div>种群数量(没标注为空)<canvas id="canvasB" width="200px" height="200px"></canvas></div>
+		<div>竞争优劣(没标注为空)<canvas id="canvasC" width="200px" height="200px"></canvas></div>
+	</div>
+	<div class="contaner2">
+		<div>数量(罗非鱼:Gray&虾:Blue)<canvas id="canvasD" width="600px" height="250px"></canvas></div>
+		<div><a href="more.html">Temp:Blue&PH:Red(详情)</a><canvas id="canvasE" width="600px" height="250px"></canvas></div>
+	</div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/Chart.js"></script>
+<script type="text/javascript">
+//doughnut图
+var doughnutData = [
+//				{
+//					value: 30,
+//					color:"#00db58"
+//				},
+				{
+					value : 50,
+					color : "#00acee"
+				},
+				{
+					value : 100,
+					color : "#ffba2a"
+				},
+				{
+					value : 40,
+					color : "#ff1a56"
+				},
+//				{
+//					value : 120,
+//					color : "#4D5360"
+//				}
+//			
+			];
+
+	var myDoughnut = new Chart(document.getElementById("canvasA").getContext("2d")).Doughnut(doughnutData);
+//polarArea
+	var chartData = [
+			{
+				value : 94,
+				color: "#9143ff"
+			},
+			{
+				value : 92,
+				color: "#C7604C"
+			},
+			{
+				value : 83,
+				color: "#21323D"
+			},
+			{
+				value : 83,
+				color: "#9D9B7F"
+			},
+			{
+				value : 88,
+				color: "#7D4F6D"
+			},
+			{
+				value : 86,
+				color: "#584A5E"
+			}
+		];
+	var myPolarArea = new Chart(document.getElementById("canvasB").getContext("2d")).PolarArea(chartData);
+//radar图
+var radarChartData = {
+			labels : ["虾","鲫鱼","蜡鱼","A类","B类","C类","D类"],
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [65,59,90,0,0,0,0]
+				},
+				{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [28,48,40,19,96,27,100]
+				}
+			]
+			
+		}
+
+	var myRadar = new Chart(document.getElementById("canvasC").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 10});
+//	bar图
+			var barChartData = {
+			labels : ["1 MON","2 FEB","3 MAR","4 APR","5 MAY","6 JUN","7 JUL"],
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					data : [76,76,79,80,80,92,93]
+				},
+				{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					data : [78,79,79,81,82,86,86]
+				}
+			]
+			
+		}
+
+	var myLine = new Chart(document.getElementById("canvasD").getContext("2d")).Bar(barChartData);
+//line图
+	var lineChartData = {
+			labels : ["1 MON","2 FEB","3 MAR","4 APR","5 MAY","6 JUN","7 JUL"],
+			datasets : [
+				{
+					fillColor : "#b49494",
+					strokeColor : "red",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [7.8,7.9,7.7,7.8,7.6,7.7,7.8]
+				},
+				{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "blue",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [18,19,20,17,19,19,18]
+				}
+			]
+			
+		}
+
+	var myLine = new Chart(document.getElementById("canvasE").getContext("2d")).Line(lineChartData);
+</script>

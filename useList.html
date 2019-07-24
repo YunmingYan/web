@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="M_Adnan">
+<title>userList</title>
+<script src="./js/jquery.min.js"></script> 
+<link href="http://vjs.zencdn.net/5.5.3/video-js.css" rel="stylesheet">
+    <!-- If you'd like to support IE8 -->
+<script src="http://vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>
+<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+<!--视频开关-->
+<link rel="stylesheet" type="text/css" href="./rs-plugin/rs-plugin/css/settings.css" media="screen" />
+
+<!-- Bootstrap Core CSS -->
+<!--右上按钮-->
+<link href="./css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="./css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="./css/ionicons.min.css" rel="stylesheet">
+<!--右上按钮排版-->
+<link href="./css/main.css" rel="stylesheet">
+<!--导航栏样式-->
+<link href="./css/style.css" rel="stylesheet">
+<link href="./css/responsive.css" rel="stylesheet">
+
+<!-- COLORS -->
+<link rel="stylesheet" id="color" href="./css/default.css">
+
+<!-- JavaScripts -->
+<script src="./js/modernizr.js"></script>
+
+<!--<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,900,100' rel='stylesheet' type='text/css'>--->
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+	/*用于水产养殖的水下机器人——仿生海龟*/
+	#title1{color:rgba(247,255,121,1.00);font-family:;}
+	#useListBox{margin-top: 25%}
+	#useList li{
+		display: inline-block;
+		padding: 5px;
+	}
+</style>
+
+<style>
+	*{margin: 0;padding: 0;}
+	body{width: 100%;height: 1000px;background: url(images/userList.jpg)}
+	.main{
+		color:aliceblue;
+/*		background: rgba(197,197,197,1.00);*/
+		width:230px;
+		height: auto;
+	}
+	#addNew{
+		color: black;
+/*		width:230px;*/
+		height: 40px;
+/*		background: rgba(173,171,171,1.00);*/
+		display:flex;
+	}
+ 	#addNew li{
+		color:aliceblue;
+		width: 50%;
+		height: 40px;
+		line-height: 40px;
+		padding-left: 10px;
+/*		text-align: center;*/
+		font-weight: 500;
+		font-size:18px;
+/*		border: solid 1px rgba(118,112,112,1.00);*/
+	}
+	#addNew li:hover{color: red;}
+	.inputAdd{color: black;}
+	a:hover{color: red;}
+	#nav-a p:hover{color: red;}
+	#useList{margin-top: 20%;}
+	#useList ul li{font-size: 16px;}
+</style>
+
+
+<style>
+	.det:hover{color: rgba(211,13,44,1.00)}
+</style>
+</head>
+<body>
+<div class="main" style="width: 1520px;padding-left: 680px;">
+<a href="head.html"><div id="nav-a" style="color: aliceblue; font-size: 20px;margin-top: 10px;margin-left: 80%">返回</div></a>
+<div id="addNew" >
+	<li onClick="addNew()" style="padding-top: 20%;">
+		添加新用户
+	</li>
+<!--	<li style="padding-left: 300px;display: block; color:wite">-->
+<!--		<a href="head.html">返回</a>-->
+<!--	</li>-->
+</div>
+	<div style="display: none;padding-top: 20%;" class="inputAdd">
+		<input type="text" placeholder="请输入账号" class="useName">
+		<input type="text" placeholder="请输入密码" class="password">
+		<button id="navBtn" onclick="submint()" type="button" value="">确定</button>
+	</div>
+	<div id="useList" style=""></div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+	var dataList = {"code":200,"msg":"查询成功","data":[{"userId":4,"userName":"zhangsan","password":"3929978af615fe7d","registerTime":"2018-11-01T03:16:10.098+0000","admin":false},{"userId":6,"userName":"linyi","password":"39761c6fd0768aa1","registerTime":"2018-11-01T04:50:35.020+0000","admin":false},{"userId":7,"userName":"wangwu","password":"b8a5ab181bd7360f","registerTime":"2018-11-06T04:13:26.525+0000","admin":false},{"userId":11,"userName":"老新城","password":"65ce5d27db7f19b3","registerTime":"2018-11-14T09:30:21.283+0000","admin":false},{"userId":12,"userName":"大新城","password":"0de766da71daf6ff","registerTime":"2018-11-14T13:53:40.461+0000","admin":false}]};
+	console.log(dataList);
+	var strList = dataList.data;
+	for(var i=0; i<strList.length;i++){
+		var str = '<ul><li>'+strList[i].userId+'</li><li>'+strList[i].userName+'</li><li class="det">删除</li></ul>';
+		$('#useList').append(str);
+		var detButtons = document.querySelectorAll('.det');
+//		console.log()
+		(function(arg){
+		   detButtons[arg].onclick = function(){
+				console.log(strList[arg].userId);
+			   $.ajax({
+					type:"post",
+//					url:'http://www.itearlpickmeup.cn/user/delete',
+					dataType: 'json',
+				   data:{
+					   userId: strList[arg].userId
+				   },
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					success: function(data){
+						console.log(data)
+						history.go(0);
+						alert('删除成功')
+					}, 
+					error: function(data){
+						console.log(data);
+						alert('删除失败')
+
+					}
+				});
+		   };
+	   })(i)  
+	}
+	//获取 用户列表
+	$.ajax({
+		type:"get",
+//		url:'http://www.itearlpickmeup.cn/user/list',
+		dataType: 'json',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		success: function(data){
+			console.log(data)
+			var strList = JSON.stringify(data.data);
+			for(var i=0; i<strList.length;i++){
+				var str = '<ul><li>'+strList[i].userId+'</li><li>'+strList[i].userName+'</li><li class="det">删除</li></ul>';
+				$('#useList').append(str);
+				var detButtons = document.querySelectorAll('.det');
+				//删除用户
+				(function(arg){
+				   detButtons[arg].onclick = function(){
+						console.log(strList[arg].userId);
+					   $.ajax({
+							type:"post",
+//							url:'http://www.itearlpickmeup.cn/user/delete',
+							dataType: 'json',
+						   data:{
+							   userId: strList[arg].userId
+						   },
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							success: function(data){
+								console.log(data)
+								history.go(0);
+							}, 
+							error: function(data){
+								console.log(data);
+
+							}
+						});
+				   };
+			   })(i)
+			}
+		}, 
+		error: function(data){
+			console.log(data);
+
+		}
+	});
+	//添加用户
+	function addNew(){
+		var div = document.getElementById("useList");
+		div.style.cssText='margin-top:0px;';
+		$('.inputAdd').show();
+	}
+
+	//添加用户
+	function submint(){
+		var userName= $('.useName').val();
+		var password = $('.password').val();
+		console.log(userName)
+		$.ajax({
+			type:"post",
+			url:'http://www.itearlpickmeup.cn/user/add',
+			dataType: 'json',
+			data: {
+				userName:userName ,
+				password: password ,
+			},
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			success: function(data){
+				console.log(data)
+				$('.inputAdd').hide();
+				alert('添加成功')
+			}, 
+			error: function(data){
+				console.log(data);
+				alert('添加失败')
+			}
+		});	
+	}
+		
+</script>
+</body>
+</html>

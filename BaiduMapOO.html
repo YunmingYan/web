@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#allmap{height:500px;width:100%;}
+		#r-result{width:100%; font-size:14px;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3zmuNT9l7et1jIitey2ylZhiSLvwdp8G"></script>
+	<title>GPS定位</title>
+</head>
+<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+<script src="js/address.js"></script>
+<script src="js/cookieUtil.js"></script>
+<!--<script src="js/websocket.js"></script>-->
+<body>
+	<div id="allmap"></div>
+	<div id="data"></div>
+<!--
+	<div id="r-result">
+		经度: <input id="longitude" type="text" style="width:100px; margin-right:10px;" />
+		纬度: <input id="latitude" type="text" style="width:100px; margin-right:10px;" />
+		<input type="button" value="查询" onclick="theLocation()" />
+	</div>
+-->
+</body>
+</html>
+<script type="text/javascript">
+	var E = [];
+	var W = [];
+
+//	var E = [110.294437];
+//	var W = [21.153755];
+    var websocket = null;
+	var GPSE = 11017.6662;
+	var GPSW = 2109.2253;
+
+
+
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+		var userId = cookieUtil.get("userId")
+		console.log("userId："+userId)
+        websocket = new WebSocket("ws://" + A + "/getServer/"+userId);
+//		websocket = new WebSocket("ws://111.230.89.193:8888/getServer")
+//        websocket = new WebSocket("ws://192.168.31.8:8888/getServer");
+    }
+    else{
+        alert('Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function(){
+        setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function(event){
+        setMessageInnerHTML("open");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function(event){
+//      setMessageInnerHTML(event.data);
+		console.log(event)
+//		console.log(JSON.parse(event.data))
+//		console.log(JSON.parse(event))
+		var apr = JSON.parse(event.data);
+		console.log(apr)
+		var GPS_JD = apr.GPS_JD;
+		var GPS_WD = apr.GPS_WD;
+		console.log(GPS_JD)
+		console.log(GPS_WD)
+		GPSE = GPS_JD;
+		GPSW = GPS_WD;
+		$('#data').html()
+
+		
+		//	110.304891,21.15705
+		//经度运算
+//			var GPSE = 11017.6662;
+		//	alert(GPSE.length)
+			var GPSE2 = GPSE*10000
+		//	alert(GPSE2)
+			var GPSE3 = parseInt(GPSE2 % 1000000)
+		//	alert(GPSE3)
+			var GPSE4 = (GPSE2-GPSE3)/1000000
+			var GPSE5 = GPSE3/600000
+//			alert(GPSE5)
+			E = GPSE4+GPSE5
+//			console.log('经度：'+Eset)
+//			cookieUtil.unset("E")
+//			cookieUtil.set("E","Eset")
+
+		//纬度运算
+//			var GPSW = 2109.2253;
+			var GPSW2 = GPSW*10000
+			var GPSW3 = parseInt(GPSW2 % 1000000)
+//			alert(GPSW3)
+			var GPSW4 = (GPSW2-GPSW3)/1000000
+//			alert(GPSW4)
+			var GPSW5 = GPSW3/600000
+//			alert(GPSW5)
+			W = GPSW4+GPSW5
+//			console.log('纬度：'+Wset)
+//			cookieUtil.unset("W")
+//			cookieUtil.set("W","Wset")
+
+
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+//        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+    //发送消息
+    function send(){
+        var message = document.getElementById('text').value;
+        websocket.send(message);
+    }
+//
+////	110.304891,21.15705	
+////	转换:110.29443666666667,21.153755
+////	二教：110.304882,21.157063
+////	var kJ = 110.304882/110.29443666666667;
+////	var kW = 21.157063/21.153755;
+////经度运算
+//	var GPSE = 11017.6662;
+////	alert(GPSE.length)
+//	var GPSE2 = GPSE*10000
+////	alert(GPSE2)
+//	var GPSE3 = parseInt(GPSE2 % 1000000)
+////	alert(GPSE3)
+//	var GPSE4 = (GPSE2-GPSE3)/1000000
+//	var GPSE5 = GPSE3/600000
+////	alert(GPSE5)
+////	var E = (GPSE4+GPSE5)*kJ
+//	var E = GPSE4+GPSE5
+//	console.log('经度：'+E)
+//	
+//	
+//	
+//	//纬度运算
+//	var GPSW = 2109.2253;
+//	var GPSW2 = GPSW*10000
+//	var GPSW3 = parseInt(GPSW2 % 1000000)
+////	alert(GPSW3)
+//	var GPSW4 = (GPSW2-GPSW3)/1000000
+////	alert(GPSW4)
+//	var GPSW5 = GPSW3/600000
+////	alert(GPSW5)
+////	alert(GPSE5)
+////	var W = (GPSW4+GPSW5)*kW
+//	var W = GPSW4+GPSW5
+//	console.log('纬度：'+W)
+//	
+//
+//	
+//	// 百度地图API功能
+//	var map = new BMap.Map("allmap");
+//	map.centerAndZoom(new BMap.Point(116.331398,39.897445),11);
+//	map.enableScrollWheelZoom(true);
+//	
+//	
+//	// 用经纬度设置地图中心点
+//	window.onload=function theLocation(){
+////		if(document.getElementById("longitude").value != "" && document.getElementById("latitude").value != ""){
+//			map.clearOverlays(); 
+//			//设置marker图标为水滴
+//			var point = new BMap.Point(E,W);
+//			var vectorMarker = new BMap.Marker(new BMap.Point(point.lng,point.lat), {
+//			  // 指定Marker的icon属性为Symbol
+//			  icon: new BMap.Symbol(BMap_Symbol_SHAPE_POINT, {
+//				scale: 1.2,//图标缩放大小
+//				fillColor: "orange",//填充颜色
+//				fillOpacity: 0.8//填充透明度
+//			  })
+//			});
+////			map.removeOverlay(vectorMarker)
+//			map.addOverlay(vectorMarker);
+//			map.panTo(point);
+////		}
+//	}
+//	
+	
+			//单击获取点击的经纬度
+			
+			
+	// 百度地图API功能
+    //GPS坐标
+    var x = cookieUtil.get("ESet");
+    var y = cookieUtil.get("WSet");
+	console.log("未转换坐标x："+x)
+	console.log("未转换坐标y："+y)
+    var ggPoint = new BMap.Point(x,y);
+
+
+    var points = [new BMap.Point(x,y),
+//                  new BMap.Point(x+1,y+1),
+//                  new BMap.Point(x+2,y+2),
+//                  new BMap.Point(x+3,y+3),
+//                  new BMap.Point(x+4,y+4)
+    ];
+
+    //地图初始化
+    var bm = new BMap.Map("allmap");
+    bm.centerAndZoom(new BMap.Point(x,y), 15);
+	bm.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+	bm.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+
+    //坐标转换完之后的回调函数
+    translateCallback = function (data){
+//		console.log(data)
+      if(data.status === 0) {
+        for (var i = 0; i < data.points.length; i++) {
+//            bm.addOverlay(new BMap.Marker(data.points[i]))
+			var vectorMarker = new BMap.Marker(data.points[i], {
+			  // 指定Marker的icon属性为Symbol
+			  icon: new BMap.Symbol(BMap_Symbol_SHAPE_POINT, {
+				scale: 1.2,//图标缩放大小
+				fillColor: "orange",//填充颜色
+				fillOpacity: 0.8//填充透明度
+			  })
+			});
+			bm.addOverlay(vectorMarker);
+			
+			
+			
+            bm.setCenter(data.points[i]);
+			x = data.points[0].lng;
+			y = data.points[0].lat;
+        }
+      }
+    };
+    setInterval(function(){
+		var x = cookieUtil.get("Eset");
+		var y = cookieUtil.get("Wset");
+		
+        var convertor = new BMap.Convertor();
+        convertor.translate(points, 1, 5, translateCallback)
+    }, 2000);
+	
+	
+	
+	
+	
+	//单击获取点击的经纬度
+		bm.addEventListener("click",function(e){
+			bm.clearOverlays();
+			console.log('转换坐标x：'+x)
+			console.log('转换坐标y：'+y)
+
+//		重新来	
+//		//	var GPSW = 2109.2253;
+//		//	var GPSE = 11017.6662;
+////			百度经度坐标转换成GPS坐标
+//			var bj1 = x*100000000000000
+//			var bj2 = parseInt(bj1 % 100000000000000)//小数点后
+//			alert(bj2)
+//			var bj3 = bj1-bj2;
+////			alert(bj3)
+//			var bj4 = bj3/100000000000000
+////			alert(bj4)
+//			var bj5 = bj2-x
+////			alert(bj5)
+//			var bj6 = bj5/100000000000000
+////			alert(bj6)
+//			var bj7 = bj4+bj6
+////			alert(bj7)
+////			百度纬度坐标转换成GPS坐标
+//			var bw1 = y*100000000000000
+//			var bw2 = parseInt(bw1 % 100000000000000)
+//			alert(bw2)
+//			var bw3 = bw1-bw2;
+//			alert(bw3)
+//			var bw4 = bw3
+//			alert(bw4)
+//			var bw5 = bw2-y
+//			alert(bw5)
+//			var bw6 = bw5
+//			alert(bw6)
+//			var bw7 = bw4+bw6
+//			alert(bw7)
+//			
+			
+			
+			
+			
+			
+//			console.log(y)
+
+			//设置marker图标为水滴
+			var point = new BMap.Point(x,y);
+			var vectorMarker = new BMap.Marker(new BMap.Point(point.lng,point.lat), {
+			  // 指定Marker的icon属性为Symbol
+			  icon: new BMap.Symbol(BMap_Symbol_SHAPE_POINT, {
+				scale: 1.2,//图标缩放大小
+				fillColor: "orange",//填充颜色
+				fillOpacity: 0.8//填充透明度
+			  })
+			});
+			bm.addOverlay(vectorMarker);
+
+			
+			console.log(e.point.lng + "," + e.point.lat);
+//			var new_point2 = new
+			BMap.Point(e.point.lng,e.point.lat);
+			var marker2 = new BMap.Marker(new_point2);   // 创建标注终点
+			bm.addOverlay(marker2);              // 将标注添加到地图中
+			bm.panTo(new_point2);
+						
+			var pointA = new BMap.Point(x,y);  // 创建点坐标A
+			var pointB = new BMap.Point(e.point.lng,e.point.lat);  // 创建点坐标B
+			console.log('从A区到B区的距离是：'+(bm.getDistance(pointA,pointB)).toFixed(2)+' 米。');  //获取两点距离,保留小数点后两位
+			alert('距离：'+(bm.getDistance(pointA,pointB)).toFixed(2)+' 米，正在前往。');  //获取两点距离,保留小数点后两位
+			var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+			bm.addOverlay(polyline);     //添加折线到地图上
+			
+		})
+		
+
+
+</script>
