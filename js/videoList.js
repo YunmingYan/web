@@ -45,5 +45,5 @@
 		},
 	});
 //	console.log(rtmp)
-	$('#video')[0].src = rtmp
- 	var player = new EZuikit.EZUIPlayer('myPlayer');
+//	$('#video')[0].src = rtmp
+// 	var player = new EZuikit.EZUIPlayer('myPlayer');
