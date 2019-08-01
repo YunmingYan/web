@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+    <meta name="renderer" content="webkit">
+    <title>RTMP播放协议</title>
+    <style>
+        body{margin:0;}
+        #myPlayer{max-width: 600px;width: 600px;}
+    </style>
+</head>
+<script>
+</script>
+<body>
+<script src="https://open.ys7.com/sdk/js/2.0/ezuikit.js"></script>
+<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+<div style="width: 600px; margin: 0 auto;">
+	<video width="600px" height="400px" poster="../img/2.jpg" id="myPlayer" controls playsInline webkit-playsinline >
+    <source id="video" src="" type="rtmp/flv" /></video>
+</div>
+<script>
+	
+</script>
+<script type="text/javascript" src="../js/videoList.js"></script>
+<!--<script>
+	var rtmp = '';
+	var appKey='231fa5f4982e4d1cb5d2aeb03026b2a7';
+	var appSecret='8960216eef839d38527aa725493c7c43';
+	var accessToken='';
+//	alert('step1')
+	$.ajax({
+		type:'POST',
+		async:false,
+		url:'https://open.ys7.com/api/lapp/token/get',
+		data:{
+			appKey:appKey,
+			appSecret:appSecret,
+		},
+		success:function(data){
+			console.log('获取accessToken')
+			console.log(data)
+			var access = data.data.accessToken
+			accessToken = access
+//			console.log(accessToken)
+		},
+		error:function(data){
+			var msg = data.msg
+			console.log(msg)
+		},
+	});
+	console.log('得到accessToken：')
+	console.log(accessToken)
+	
+	$.ajax({
+		type:'POST',
+		async:false,
+		url:'https://open.ys7.com/api/lapp/live/video/list',
+		dataType:'JSON',
+		data:{
+			accessToken:accessToken,
+		},
+		success:function(data){
+			console.log('获取rtmp地址：')
+			console.log(data)
+			rtmp = 'rtmp://rtmp.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd'
+		},
+		error:function(data){
+			
+		},
+	});
+//	console.log(rtmp)
+	$('#video')[0].src = rtmp
+ 	var player = new EZuikit.EZUIPlayer('myPlayer');
+
+
+</script>-->
+	
+</body>
+</html>

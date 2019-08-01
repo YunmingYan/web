@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>EZOPEN播放协议</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    .hint {
+      font-size: 14px;
+      line-height: 3em;
+      color: gray;
+    }
+
+    #url {
+      width: 100%;
+    }
+
+    .btn-container {
+      margin: 10px;
+    }
+
+    #myPlayer {
+      max-width: 600px;
+      width: 100%;
+    }
+  </style>
+  <script src="../ezuikit.js"></script>
+  <script src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- ezopen://open.ys7.com/f01018a141094b7fa138b9d0b856507b[.hd].live.[rtmp|hls|ws|flv|m3u8] http://hls.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.hd.m3u8-->
+    <div class="hint">demo页面仅为代码示例无法直接运行，需要部署到服务器上才可以播放。另外监控模式与多窗口模式对浏览器版本有要求：Chrome: 55+ Firefox: V55+。</div>
+    <textarea id="url" placeholder="这里输入直播地址">http://hls.open.ys7.com/openlive/f01018a141094b7fa138b9d0b856507b.m3u8</textarea>
+  <div class="btn-container">
+    <button id="init">初始化播放</button>
+    <button id="stop">结束</button>
+  </div>
+
+  <video 
+    id="myPlayer"
+    autoplay
+    src=""
+    controls
+    playsInline 
+    webkit-playsinline
+  >
+  </video>
+
+  <script>
+    $('#init').click(function () {
+      var url = $('#url').val().trim();
+      $('#myPlayer').attr("src", url);
+      var player = new EZUIKit.EZUIPlayer('myPlayer');
+      // 日志
+      player.on('log', log);
+
+      function log(str) {
+        var div = document.createElement('DIV');
+        div.innerHTML = (new Date()).Format('yyyy-MM-dd hh:mm:ss.S') + JSON.stringify(str);
+        document.body.appendChild(div);
+      }
+      $("#stop").click(function () {
+        player.stop();
+      })
+    });
+  </script>
+</body>
+
+</html>

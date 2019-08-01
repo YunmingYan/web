@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <title>EZOPEN播放协议</title>
+  <style>
+	  *{margin: 0;padding: 0;}
+	  .btn div:hover{background-color:rgba(63,240,87,1.00)}
+	  img{opacity: 0.3;width: 50px;height: 50px;}
+	  img:hover{opacity: 1;}
+  </style>
+</head>
+<script>
+</script>
+
+<body style="background-color:rgba(188,183,183,1.00);width: 100%;">
+<script src="../ezuikit.js"></script>
+<!-- <script src="../js/jsPlugin-1.2.0.js"></script> -->
+<script src="../js/jquery.min.js"></script>
+<script src="../../../js/cookieUtil.js"></script>
+<script src="../../../js/videoList.js"></script>
+	<div style="width: 750px;height: 500px;margin: 0 auto;">
+		<div id="playWind" style="width: 750px; height: 500px;"></div>
+				
+				<div class="controlBtn" style="width: 150px;height: 150px;background-color: rgba(188,183,183,0.10);position: relative;left: 550px; top: -150px;border-radius: 75px;">
+					<div id="up" name="0" style="position: absolute;left: 50px;top:0px; ">
+						<img src="../../../img/video/up.png" alt="">
+					</div>
+					<div style="width: 150px;height: 50px;display: flex;position: absolute;top: 50px;">
+						<div id="left" name="2">
+							<img src="../../../img/video/left.png" alt="">
+						</div>
+						<div id="stop" style="width: 50px;height: 50px;"></div>
+						<div id="right" name="3">
+							<img src="../../../img/video/right.png" alt="">
+						</div>
+					</div>
+					<div id="down" name="1" style="position: absolute;left: 50px;top: 100px;">
+						<img src="../../../img/video/down.png" alt="">
+					</div>
+				</div>
+		
+		<div class="btn" style="display: flex;position: relative;top: -150px;">
+			<div id="back" style="width: 400px;border: 1px solid black">
+				<img src="../../../img/video/back.png" alt="" width="35px" height="35px" style="display: block;margin: 5px auto;">
+			</div>
+			<div id="reflash" style="width: 400px;border: 1px solid black">
+				<img src="../../../img/video/reflash.png" alt="" width="35px" height="35px" style="display: block;margin: 5px auto;">
+			</div>
+		</div>
+	</div>
+<script>
+window.onload=function () {
+function handleError(e){
+	  console.log('捕获到错误',e)
+	 // log(JSON.stringify(e),'error');
+	var msg = e.msg
+	var retcode = e.retcode
+	  if(retcode=5450){
+		  alert(msg)
+		}
+	}
+	function handleSuccess(){
+		console.log("播放成功回调函数，此处可执行播放成功后续动作");
+	}
+	
+	var url = "ezopen://open.ys7.com/b3808ea696cf4c86bb5712eeaa8b08c9.hd.live";
+//	var url = "ezopen://open.ys7.com/203751922/1.hd.live";//测试
+	var accessToken = cookieUtil.get("accessToken");
+//	var accessToken = "ra.1g8xac6r91f3u4zq3xhofeyd6s1jsnds-7zobqf6vie-1eva4a6-gutnyxt3g";//测试
+		console.log('载入的accessToken：'+accessToken)
+	var decoder = new EZUIKit.EZUIPlayer({
+		id: 'playWind',
+		autoplay: true,
+		url: url,
+		accessToken: accessToken,
+		decoderPath: '../',				//decoderPath：${window.YOUR_PATH};请在生产模式输入ezuikit.js的绝对路径
+		width: 750,
+		height: 500,
+		handleError: handleError,
+		handleSuccess: handleSuccess,
+	});
+		player.play();
+	}
+</script>
+	
+	<script>
+		$('#back').click(function(){
+			window.location.href='../../../head.html'
+		});
+		$('#reflash').click(function(){
+			window.location.href='demo-monitor.html'
+		});
+	</script>
+	
+<script>
+//控制摄像头运动
+	$('#up,#down,#left,#right').mousedown(function(){
+		var direction = $(this).attr("name");
+		console.log(direction)
+		$.ajax({
+			type:'POST',
+			url:'https://open.ys7.com/api/lapp/device/ptz/start',
+			dataType:'JSON',
+			data:{
+				accessToken:cookieUtil.get("accessToken"),		//授权过程获取的access_token	
+				deviceSerial:'D35379600',		//设备序列号,存在英文字母的设备序列号，字母需为大写	
+				channelNo:'1',			//通道号	
+				direction:direction,	//操作命令：0-上，1-下，2-左，3-右，4-左上，5-左下，6-右上，7-右下，8-放大，9-缩小，10-近焦距，11-远焦距	
+				speed:'1',				//云台速度：0-慢，1-适中，2-快	
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(data){
+				console.log(data)
+			}
+		
+		})
+	})
+</script>
+</body>
+
+</html>
