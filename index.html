@@ -11,6 +11,10 @@
 </head>
 
 <body style="background-color: #1b2c34;">
+	<p id="screen" style="position: fixed;width: 100%;height: 100%;background-color:  rgba(131,131,131,0.50)">
+		<img style="position: fixed;top: 13%;left: 15%;" src="./img/index/screenChange.png" alt="" width="700px" height="700px">
+		<h1 id="screenText" style="position: fixed;top: 55%;left: 30%;font-size: 70px;">请横屏使用</h1>
+	</p>
 	<div style="max-width: 1350px;height: 1000px; background: url(img/1.jpg) no-repeat;margin: 0 auto;">
 		<div style="height: 100px;"></div>
 		<div class="contaner" style="width: 300px;margin: 0 auto;">
@@ -34,7 +38,83 @@
 </html>
 <script>
 	//检查用户设备
-	navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) && (alert("请横屏使用"))
+//	navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) && (alert("请横屏使用"))
+	
+	//判断手机横竖屏状态：
+//setInterval(function(){
+//	if(window.orientation==180||window.orientation==0){
+////		alert("竖屏状态！")
+//		alert("请将手机横屏使用")
+//	}
+//	if(window.orientation==90||window.orientation==-90){
+////		alert("横屏状态！")
+//	}
+//},2000)
+	
+
+
+(function(){
+//开始时检测屏幕是否竖屏
+	if(window.orientation==0){
+//		alert("竖屏状态！")
+
+	}
+	else{
+		$('#screen').hide()
+		$('#screenText').hide()
+	}
+	
+//旋转屏幕触发事件	
+	var init = function(){
+		var updateOrientation = function(){//方向改变执行的函数
+			var orientation = window.orientation;
+		switch(orientation){
+			case 90:
+			case -90:
+			orientation = 'landscape'; //这里是横屏
+			break;
+			default:
+			orientation = 'portrait'; //这里是竖屏
+			break;
+		}
+//html根据不同的旋转状态，加上不同的class，横屏加上landscape，竖屏
+//加上portrait
+			document.body.parentNode.setAttribute('class',orientation);
+		};
+// 每次旋转，调用这个事件。
+		window.addEventListener('orientationchange',updateOrientation,false);
+// 事件的初始化
+		updateOrientation();
+	};
+	window.addEventListener('DOMContentLoaded',init,false);
+})();
+	
+	window.addEventListener('orientationchange',function(){
+//		alert(window.orientation); //这里可以根据orientation做相应的处理
+		var state = window.orientation
+//		alert(state)
+		if(state == 0){
+//			alert("竖屏")
+			$('#screen').show()
+			$('#screenText').show()
+
+		}
+		else if(state == 90 || state == -90){
+//			alert("请横屏使用")
+			$('#screen').hide()
+			$('#screenText').hide()
+		}
+	},false);
+
+	//页面加载时调用
+	$(function(){
+		orient();
+	});
+	//用户变化屏幕方向时调用
+	$(window).bind( 'orientationchange', function(e){
+		orient();
+	});
+
 </script>
 <script>
 	var user = $("input[name=userName]");
