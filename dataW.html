@@ -43,7 +43,7 @@
 			</div>
 			<div class="nav" style="height: 70px;">
 				<a href="head.html">主页</a>
-				<a href="ckplayer.html">视频</a>
+				<a href="./SDK/EZ/demo/demo-monitor.html">视频</a>
 				<a href="dataW.html">数据</a>
 				<a href="#">切换用户</a>
 				<a href="index.html">退出</a>
@@ -60,11 +60,11 @@
 		
 		
 		
-		<div class="data" style="width: 250px;height: 600px;background-color: #2f2b2b;">
+		<div class="data" style="width: 250px;height: 640px;background-color: #2f2b2b;">
 			
 			<a href="head.html" style="color: #FFF;text-decoration: none;width: 250px;height: 100px;display: block;font-size: 20px;line-height: 100px;text-align: center;"><</a>
 
-			<div class="data" >
+			<div id="tempBtn" class="data">
 			<a href="" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
 			温度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
 			</a>
@@ -74,13 +74,13 @@
 			湿度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
 			</a>
 			</div>
-			<div class="data" >
-			<a href="" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
-			CO2浓度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+			<div id="weatherBtn" class="data">
+			<a href="#" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			天气&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
 			</a>
 			</div>
 			<div class="data" >
-			<a href="" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			<a href="#" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
 			光照强度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
 			</a>
 			</div>
@@ -91,7 +91,7 @@
 -->
 		</div>
 		
-		<div class="head" style="margin: -600px 0 0 250px;width: 888px;height: 100px; background-color: #1c1c1c;">
+		<div class="head" style="margin: -640px 0 0 250px;width: 888px;height: 100px; background-color: #1c1c1c;">
 		
 		</div>
 		
@@ -112,7 +112,7 @@
 			</div>
 		</div>		
 -->
-		<div class="box" style="width: 886px;height: 498px;margin-left: 250px; border: 1px solid black">
+		<div class="box" style="width: 884px;height: 538px;margin-left: 250px; border: 2px solid black">
 <!--温度-->
 			<div id="temp" class="hightChart" style="display: block;">
 				<div id="container" style="min-width:400px;height:400px"></div>
@@ -122,7 +122,10 @@
 				<div id="container-speed" style="width: 400px; height: 250px; float: left"></div>
 				<div id="container-rpm" style="width: 400px; height: 250px; float: left"></div>
 			</div>
-			  
+<!--天气-->
+			<div id="weather" style="display: none;width: 600px;margin: 0 auto;">
+				<iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tw&skin=pitaya" frameborder="0" width="600" height="500" allowtransparency="true"></iframe>
+			</div>
 <!--数字图表-->
 			<div class="cycle_data margin_c" style="display: none;">
 				<div class="flex" style="width:500px">
@@ -148,7 +151,6 @@
 <script>
 //温度图表
 tempf();
-
 function tempf(){
 	var chart = null;
 	chart = Highcharts.chart('container', {
@@ -235,6 +237,7 @@ function tempf(){
 //湿度
 // 公共配置
 function wetf(){
+var chart = null;
 Highcharts.setOptions({
 	chart: {
 		type: 'solidgauge'
@@ -360,14 +363,22 @@ setInterval(function () {
 <script>
 	var temp = document.getElementById('temp');
 	var wet = document.getElementById('wet');
+	var weather = document.getElementById('weather');
 	$('#tempBtn').click(function(){
-		temp.style.cssText="display:block;"
-		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: none;"
-		tempf();
-	})
+//		temp.style.cssText="display:block;"
+//		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: none;"
+//		weather.style.cssText="display: none;width: 600px;margin: 0 auto;"
+//		tempf();
+	});
 	$('#wetBtn').click(function(){
 		temp.style.cssText="display:none;"
 		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: block;"
+		weather.style.cssText="display: none;width: 600px;margin: 0 auto;"
 		wetf();
+	});
+	$('#weatherBtn').click(function(){
+		temp.style.cssText="display:none;"
+		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: none;"
+		weather.style.cssText="display: block;width: 600px;margin: 0 auto;"
 	});
 </script>
