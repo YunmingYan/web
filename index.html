@@ -33,6 +33,10 @@
 	<script type="text/javascript" src="js/cookieUtil.js"></script>
 </html>
 <script>
+	//检查用户设备
+	navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) && (alert("请横屏使用"))
+</script>
+<script>
 	var user = $("input[name=userName]");
 	var pass = $("input[name=password]");
 //	var userName = user.val();
