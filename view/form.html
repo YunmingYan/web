@@ -1,0 +1,381 @@
+<!DOCTYPE html><head>
+	<style>
+		.water-value-box{width:990px;height: 320px; display: flex;background:rgba(25,31,40,1.00);display: flex}
+		.item-con2{width:400px;margin-top: 3%}
+		.select{width: 331.95px;height: 34px;background: rgba(25,31,40,1.00);color: aliceblue;border: rgb(90,104,130) 1px solid}
+		#select-waterColor{width: 302px;height: 34px;background: rgba(25,31,40,1.00);color: aliceblue;border: rgb(90,104,130) 1px solid}
+		.select{
+/*			padding: 5px 10px;*/
+/*			border:1px solid #dcd8d8;*/
+			-webkit-appearance:none;
+			-moz-appearance:none;
+/*			appearance:none; 去掉下拉箭头*/
+		}
+			/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+/*		.select::-ms-expand { display: none;}*/
+	</style>
+</head>
+
+<!--<div class="page-body">-->
+	
+	
+<div class="form-row1">
+
+<!--
+		<div class="col4">
+			<div class="item-box">
+				<div class="item-title">button</div>
+				<div class="item-con">
+					<div class="row small">
+						<div class="key">style-01:</div>
+						<div class="val cib">							
+							<a class='btn bd blue'>blue</a>
+							<a class='btn bd green'>green</a>
+							<a class='btn bd yellow'>yellow</a>
+							<a class='btn bd' disabled="disabled">disable</a>
+						</div>
+					</div>
+					<div class="row small">
+						<div class="key">style-02:</div>
+						<div class="val cib">							
+							<a class='btn bg blue'>blue</a>
+							<a class='btn bg green'>green</a>
+							<a class='btn bg yellow'>yellow</a>
+							<a class='btn bg' disabled="disabled">disable</a>
+						</div>
+					</div>
+					<div class="row small">
+						<div class="key">animation:</div>
+						<div class="val cib">
+							<a class='btn bd blue am am-rotate'><span>rotate</span></a>
+							<a class='btn bd green am am-scale'><span>scale</span></a>
+							<a class='btn bd blue am am-border'><span>border</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+-->
+
+		<div class="col4">
+			<div class="item-box">
+				<div class="item-title">养殖资料</div>
+				<div class="item-con">
+					<div class="row small">
+						<div class="key">投放物种:</div>
+						<div class="val"><div class="select" id="select-demo1"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">养殖周期:</div>
+							<div class="val"><input type="text" class="" id="wek" name="feed-wek" placeholder="周"></div>
+<!--						<div class="val"><div class="select" id="select-search"></div></div>-->
+					</div>
+					<div class="row small">
+						<div class="key">投放时间:</div>
+						<div class="val"><div class="date-sel"><input type="text" id="beginDay"></div></div>
+					</div>
+					
+					<div id="dataBox">
+<!--
+						<div>已养殖天数：</div>
+						<div class="pass-day"></div><br/>
+						<div>距离成熟天数：</div>
+						<div id="still-day"></div>
+-->
+					</div>
+					<button id="line11Btn" onclick="Btn11()" type="button" value="" style="margin-left: 80%;width: 50px;height: 30px; border-radius:5px">提交</button>
+<!--
+					<div class="row small">
+						<div class="key">date area:</div>
+						<div class="val"><div class="date-sel"><input type="text"></div></div>
+					</div>
+-->
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="col4">
+			<div class="water-value-box">
+				<div class="item-title">水质监测</div>
+				<div class="item-con2">
+					<div class="row small">
+						<div class="key">时间:</div>
+						<div class="val"><div class="date-sel"><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">水色:</div>
+						<div class="val"><div class="select" id="select-waterColor"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">水温:</div>
+						<div class="val"><input type="text" class="" placeholder="℃"></div>
+					</div>
+					<div class="row small">
+						<div class="key">溶解氧:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+					<div class="row small">
+						<div class="key">盐度:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+<!--
+					<div class="row small">
+						<div class="key">PH值:</div>
+						<div class="val"><input type="text" class="" placeholder=""></div>
+					</div>
+					<div class="row small">
+						<div class="key">氨氮:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+					<div class="row small">
+						<div class="key">亚硝酸盐:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+-->
+					</div>
+					<div class="item-con2">
+<!--
+					<div class="row small">
+						<div class="key">时间:</div>
+						<div class="val"><div class="date-sel"><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">水色:</div>
+						<div class="val"><div class="select" id="select-waterColor"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">水温:</div>
+						<div class="val"><input type="text" class="" placeholder="℃"></div>
+					</div>
+					<div class="row small">
+						<div class="key">溶解氧:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+					<div class="row small">
+						<div class="key">盐度:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+-->
+					<div class="row small">
+						<div class="key">PH值:</div>
+						<div class="val"><input type="text" class="" placeholder=""></div>
+					</div>
+					<div class="row small">
+						<div class="key">氨氮:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+					<div class="row small">
+						<div class="key">亚硝酸盐:</div>
+						<div class="val"><input type="text" class="" placeholder="mg/L"></div>
+					</div>
+					<button id="line12Btn" onclick="submint()" type="button" value="" style="margin-left: 80%;width: 50px;height: 30px;margin-top: 50px; border-radius:5px">提交</button>
+				</div>
+<!--
+					<div class="row small">
+						<div class="key">checkbox:</div>
+						<div class="val">
+							<div class="checkbox-group" id="check-demo1"></div>
+						</div>
+					</div>
+					<div class="row small">
+						<div class="key">radio:</div>
+						<div class="val">
+							<div class="radio-group" id="radio-demo1"></div>
+						</div>
+					</div>
+					<div class="row small">
+						<div class="key">switch</div>
+						<div class="val cib"><div class="switch on"><span class="s1">on</span><span class="s2">off</span></div></div>
+					</div>
+-->
+				
+			</div>
+		</div>
+
+	</div>
+
+	<div class="form-row2">
+		
+		<div class="col4">
+			<div class="item-box">
+				<div class="item-title">投苗捕捞</div>
+				<div class="item-con">
+					<div class="row small">
+						<div class="key">放养日期:</div>
+						<div class="val"><div class="date-sel"><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">放养种类:</div>
+						<div class="val"><div class="select" id="select-demo2"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">放养重量:</div>
+						<div class="val"><input type="text" class="" placeholder="斤"></div>
+					</div>
+					<div class="row small">
+						<div class="key">放养尾数:</div>
+						<div class="val"><input type="text" class="" placeholder="尾"></div>
+					</div>
+					<div class="row small">
+						<div class="key">苗种规格:</div>
+						<div class="val"><input type="text" class="" placeholder=""></div>
+					</div>
+					<div class="row small">
+						<div class="key">苗种来源:</div>
+						<div class="val"><input type="text" class="" placeholder=""></div>
+					</div>
+					<div class="row small">
+						<div class="key">起捕日期:</div>
+						<div class="val"><div class="date-sel"><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">收获重量:</div>
+						<div class="val"><input type="text" class="" placeholder="斤"></div>
+					</div>
+					<div class="row small">
+						<div class="key">收获尾数:</div>
+						<div class="val"><input type="text" class="" placeholder="尾"></div>
+					</div>
+					<div class="row small">
+						<div class="key">销售何处:</div>
+						<div class="val"><input type="text" class="" placeholder=""></div>
+					</div>
+					<button id="line21Btn" onclick="submint()" type="button" value="" style="margin-left: 80%;width: 50px;height: 30px; border-radius:5px">提交</button>
+					
+<!--
+					<div class="row small">
+						<div class="key">inputarea:</div>
+						<div class="val">
+							<div class="input-area">
+								<div class="ia1 col4"><input type="text" value="leojs"></div>
+								<div class="ia2 col8"><input type="text" value="15021127325"></div>
+							</div>
+						</div>
+					</div>
+-->
+<!--
+					<div class="row small">
+						<div class="key">inputtag1:</div>
+						<div class="val"><div class="input-tag before"><span class="itag">Phone</span><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">inputtag2:</div>
+						<div class="val"><div class="input-tag after"><span class="itag">Phone</span><input type="text"></div></div>
+					</div>
+					<div class="row small">
+						<div class="key">textarea:</div>
+						<div class="val"><textarea></textarea></div>
+					</div>
+-->
+				</div>
+			</div>
+		</div>
+
+		<div class="col8">
+			<div class="item-box">
+				<div class="item-title">备注</div>
+				<div class="item-con">
+<!--
+					<div class="row"><div class="key">account:</div><div class="val"><input type="text"></div></div>
+					<div class="row"><div class="key">user name:</div><div class="val"><input type="text"></div></div>
+					<div class="row">
+						<div class="col6">
+							<div class="key">dept:</div>
+							<div class="val">
+								<div class="select" id="select-dept"></div>
+							</div>
+						</div>
+						<div class="col6">
+							<div class="key">post:</div>
+							<div class="val">
+								<div class="select" id="select-post"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col6">
+							<div class="key">start date:</div>
+							<div class="val"><div class="date-sel"><input type="text"></div></div>
+						</div>
+						<div class="col6">
+							<div class="key">end date:</div>
+							<div class="val"><div class="date-sel"><input type="text"></div></div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col6">
+							<div class="key">user sex:</div>
+							<div class="val">
+								<div class="radio-group" id="man-raido"></div>
+							</div>
+						</div>
+						<div class="col6">
+							<div class="key">user tgas:</div>
+							<div class="val check-row">
+								<div class="checkbox-group" id="check-tags"></div>
+							</div>
+						</div>
+					</div>
+-->
+
+					<div class="row"><div class="key">添加备注:</div><div class="val"><textarea placeholder="添加特殊记录，例如：检测人，记录员姓名，或其他导致数据偏差影响的因素。"></textarea></div></div>
+					<button id="line22Btn" onclick="submint()" type="button" value="" style="margin-left: 80%;width: 50px;height: 30px; border-radius:5px">提交</button>
+					<div class="row"><div class="key">养殖状态：</div><div class="val"><div id="tip" style="width:760px;height: 200px;border: solid 1px rgba(255,255,255,1.00);margin-top: 50px"></div></div></div>
+				</div>
+				
+			</div>
+		</div>
+
+	</div>
+
+<!--</div>-->
+
+<!--
+<script>
+//	
+	var vivd = {"code":200,"msg":"查询成功","data":[{"Id":"3"},{"msg":"当前养殖环境良好，鱼儿可以正常生长。"}]};
+	var strList = vivd.data;
+	console.log(strList)
+	var str1 = strList[0].Id;
+	var str2 = strList[1].msg;
+	console.log(str1)
+	console.log(str2)
+	var oxygen = 2;	
+	console.log(oxygen);
+	
+	function submint(){
+		alert('提交成功')
+		$('#tip').html(str2)
+}
+	if(str1>oxygen){
+		alert(str2)	
+	}
+	
+	window.onload=function(){
+		$.ajax({
+			type:'get',
+			url:'',
+			data:{
+				key:''
+		},
+			success:function(data){
+				console.log(data)
+				var str3 = JSON.stringify(data.newslist[0].content);
+				console.log(str)
+				$('#tip').html(str2)
+		},
+			error:function(data){
+				var str4 = JSON.stringify(data.msg);
+				alert('str4')
+			}
+		})
+	}
+	;
+	
+</script>
+-->
+<script src="../script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="../script/form/formStyle.js"></script>

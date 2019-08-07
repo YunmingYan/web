@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swiper Playground</title>
+    <link rel="stylesheet" href="../dist/css/swiper.min.css">
+    <meta name="viewport" content="width=device-width">
+    <script type="text/javascript" src="../../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../js/address.js"></script>
+</head>
+<body>
+    <div class="swiper-container">
+        <div class="swiper-scrollbar"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">PH
+            	<div id="SW_ph" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">温度（℃）
+            	<div id="SW_temp" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">深度（米）
+            	<div id="SW_deep" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">电导率（S/M）
+            	<div id="SW_con" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">氧化还原电位（MV）
+            	<div id="SW_orp" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">溶解氧（MG/L）
+            	<div id="SW_oo" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+            <div class="swiper-slide">电量（%）
+            	<div id="SW_power" style="width:200px;height: 200px;background-color: antiquewhite;border-radius: 200px;margin: 10px auto;line-height: 200px;font-size: 50px;"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <style>
+    body, html {
+        padding: 0;
+        margin: 0;
+        position: relative;
+        height: 100%;
+    }
+    .swiper-container {
+        width: 500px;
+        height: 300px;
+    }
+    .swiper-slide {
+        background: #f1f1f1;
+        color:#000;
+        text-align: center;
+		font-size: 30px;
+		font-family:"隶书";
+/*        line-height: 300px;*/
+    }
+    </style>
+    <script src="../dist/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper({
+            el: '.swiper-container',
+            initialSlide: 2,
+            spaceBetween: 50,
+            slidesPerView: 2,
+            centeredSlides: true,
+            slideToClickedSlide: true,
+            grabCursor: true,
+            scrollbar: {
+              el: '.swiper-scrollbar',
+            },
+            mousewheel: {
+              enabled: true,
+            },
+            keyboard: {
+              enabled: true,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+	var websocket = null;
+
+    //判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+//        websocket = new WebSocket("ws://192.168.31.8:8888/getServer");
+        websocket = new WebSocket("ws://" + B + "/getServer");
+    }
+    else{
+        alert('Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function(){
+//        setMessageInnerHTML("error");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function(event){
+//        setMessageInnerHTML("open");
+    }
+//$('#websocketData').html('');
+    //接收到消息的回调方法
+    websocket.onmessage = function(event){
+		var apr = JSON.parse(event.data);
+		$('#SW_ph').html('');
+		$('#SW_power').html('');
+		$('#SW_temp').html('');
+		$('#SW_deep').html('');
+		$('#SW_con').html('');
+		$('#SW_orp').html('');
+		$('#SW_oo').html('');
+		var time = apr.time		
+		var Siper_ph = apr.PH;
+		var Siper_power = apr.Power;
+		var Siper_temp = apr.Temp;
+		var Siper_depth = apr.Depth;
+		var Siper_con = apr.CON;
+		var Siper_orp = apr.ORP;
+		var Siper_oo = apr.OO;
+		$('#SW_ph').html(Siper_ph);
+		$('#SW_power').html(Siper_power);
+		$('#SW_temp').html(Siper_temp);
+		$('#SW_deep').html(Siper_depth);
+		$('#SW_con').html(Siper_con);
+		$('#SW_orp').html(Siper_orp);
+		$('#SW_oo').html(Siper_oo);
+	};
+//{"PH":7.5,"Power": 90.6,"Temp": 36.4,"Depth": 4.0,"PH": 7.6,"OO": 13.65,"CON": 1.6,"ORP": 342.43}
+    //连接关闭的回调方法
+    websocket.onclose = function(){
+//        setMessageInnerHTML("close");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+//        document.getElementById('data').innerHTML += innerHTML + '<br/>';
+    }
+
+    //关闭连接
+    function closeWebSocket(){
+        websocket.close();
+    }
+
+</script>

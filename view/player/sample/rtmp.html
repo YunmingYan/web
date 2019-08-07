@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>ckplayer</title>
+		<script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+		<script type="text/javascript" src="../../../js/cookieUtil.js"></script>
+		<style type="text/css">body{margin:0;padding:0px;font-family:"Microsoft YaHei",YaHei,"微软雅黑",SimHei,"黑体";font-size:14px}</style>
+
+	</head>
+
+	<body>
+		<div id="video" style="width: 600px; height: 400px;"></div>
+		<script type="text/javascript" src="../ckplayer/ckplayer.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oldId = "201104828"
+				var newId = "231608256"
+				var deviceId = cookieUtil.get("deviceId");
+//				var deviceId = ("201104828");
+//				console.log(oldId)
+				console.log(deviceId)
+//				alert(userId)
+				if(oldId===deviceId)
+					{
+//					alert('海龟1')
+					var AppKey = '952b321600b3453fae7d5435e7e29da2'
+					var Secret = 'ae1e6b8f0be161939f3bd9ed5d7656b3'
+					$.ajax({
+						type:'POST',
+						url:'https://open.ys7.com/api/lapp/token/get?',
+						dataType:"JSON",
+						data:{
+							appKey:AppKey,
+							appSecret:Secret,
+						},success:function(data){
+//							console.log(data)
+							var dataAcc = data.data.accessToken
+//							console.log(dataAcc)
+							$.ajax({
+								type:'POST',
+								url:"https://open.ys7.com/api/lapp/live/video/list?",
+								dataType:'JSON',
+								data:{
+									accessToken:dataAcc,
+								},success:function(page){
+									console.log(page)
+									var rtmp = page.data[0].rtmp
+									console.log(rtmp)
+									var videoObject = {
+									container: '#video', //容器的ID或className
+									variable: 'player',//播放函数名称
+									autoplay:false,
+									live:true,
+//									video: 'http://hls01open.ys7.com/openlive/e0f4707fa92c484cbd4e4ad31c074bd3.hd.m3u8'
+									video: 'http://hls01open.ys7.com/openlive/f71ec910bd0e4384aec9c190635fd294.hd.m3u8'
+								};
+								var player = new ckplayer(videoObject);
+								},error:function(page){
+
+								}
+							})
+						},error:function(data){
+
+						}
+					})
+						
+					}
+				else if(newId===deviceId)
+					{
+//					alert('海龟2')
+					var AppKey = '952b321600b3453fae7d5435e7e29da2'
+					var Secret = 'ae1e6b8f0be161939f3bd9ed5d7656b3'
+					$.ajax({
+						type:'POST',
+						url:'https://open.ys7.com/api/lapp/token/get?',
+						dataType:"JSON",
+						data:{
+							appKey:AppKey,
+							appSecret:Secret,
+						},success:function(data){
+//							console.log(data)
+							var dataAcc = data.data.accessToken
+//							console.log(dataAcc)
+							$.ajax({
+								type:'POST',
+								url:"https://open.ys7.com/api/lapp/live/video/list?",
+								dataType:'JSON',
+								data:{
+									accessToken:dataAcc,
+								},success:function(page){
+									console.log(page)
+									var rtmp = page.data[0].rtmp
+									console.log(rtmp)
+									var videoObject = {
+									container: '#video', //容器的ID或className
+									variable: 'player',//播放函数名称
+									autoplay:false,
+									live:true,
+//									video: 'http://hls01open.ys7.com/openlive/f71ec910bd0e4384aec9c190635fd294.hd.m3u8'
+									video: 'http://hls01open.ys7.com/openlive/e0f4707fa92c484cbd4e4ad31c074bd3.hd.m3u8'
+//									video: 'rtmp://rtmp.open.ys7.com/openlive/e0f4707fa92c484cbd4e4ad31c074bd3.hd'
+								};
+								var player = new ckplayer(videoObject);
+								},error:function(page){
+
+								}
+							})
+						},error:function(data){
+
+						}
+					})
+						
+					}
+				
+			}
+
+		</script>
+	</body>
+
+</html>

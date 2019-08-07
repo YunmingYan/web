@@ -18,9 +18,10 @@
 
 <body style="background-color:rgba(188,183,183,1.00);width: 100%;">
 <script src="../ezuikit.js"></script>
-
+<!-- <script src="../js/jsPlugin-1.2.0.js"></script> -->
 <script src="../js/jquery.min.js"></script>
-
+<!--<script src="../../../js/cookieUtil.js"></script>-->
+<!--<script defer="defer" src="../../../js/videoList.js"></script>-->
 	<div style="width: 750px;height: 500px;margin: 0 auto;">
 		<div id="playWind" style="width: 750px; height: 500px;"></div>
 				
@@ -52,12 +53,12 @@
 		</div>
 	</div>
 <script>
-
+	// JavaScript Document
 	var rtmp = '';
 	var appKey='231fa5f4982e4d1cb5d2aeb03026b2a7';
 	var appSecret='8960216eef839d38527aa725493c7c43';
 	var accessToken='';
-
+//	alert('step1')
 	$.ajax({
 		type:'POST',
 		async:false,
@@ -71,17 +72,22 @@
 			console.log(data)
 			var access = data.data.accessToken
 			accessToken = access
-
+//			console.log(accessToken)
 		},
 		error:function(data){
 			var msg = data.msg
 			console.log(msg)
 		},
 	});
+//	console.log('得到accessToken：');
+//	console.log(accessToken);
+//	cookieUtil.unset("accessToken");
+//	cookieUtil.set("accessToken",accessToken);
+
 
 function handleError(e){
 	  console.log('捕获到错误',e)
-
+	 // log(JSON.stringify(e),'error');
 	var msg = e.msg
 	var retcode = e.retcode
 	  if(retcode=5450){
@@ -93,7 +99,9 @@ function handleError(e){
 	}
 	
 	var url = "ezopen://open.ys7.com/b3808ea696cf4c86bb5712eeaa8b08c9.hd.live";
-
+//	var url = "ezopen://open.ys7.com/203751922/1.hd.live";//测试
+//	var accessToken = cookieUtil.get("accessToken");
+//	var accessToken = "ra.1g8xac6r91f3u4zq3xhofeyd6s1jsnds-7zobqf6vie-1eva4a6-gutnyxt3g";//测试
 		console.log('载入的accessToken：'+accessToken)
 	var decoder = new EZUIKit.EZUIPlayer({
 		id: 'playWind',
@@ -129,11 +137,11 @@ function handleError(e){
 			url:'https://open.ys7.com/api/lapp/device/ptz/start',
 			dataType:'JSON',
 			data:{
-				accessToken:cookieUtil.get("accessToken"),		//授权过程获取的access_token	
+				accessToken:accessToken,		//授权过程获取的access_token	
 				deviceSerial:'D35379600',		//设备序列号,存在英文字母的设备序列号，字母需为大写	
 				channelNo:'1',			//通道号	
 				direction:direction,	//操作命令：0-上，1-下，2-左，3-右，4-左上，5-左下，6-右上，7-右下，8-放大，9-缩小，10-近焦距，11-远焦距	
-				speed:'1',				//云台速度：0-慢，1-适中，2-快	
+				speed:'0',				//云台速度：0-慢，1-适中，2-快	
 			},
 			success:function(data){
 				console.log(data)
@@ -142,6 +150,28 @@ function handleError(e){
 				console.log(data)
 			}
 		
+		})
+	});
+	
+	$('#up,#down,#left,#right').mouseup(function(){
+		var direction = $(this).attr('name')
+		
+		$.ajax({
+			url:'https://open.ys7.com/api/lapp/device/ptz/stop',
+			type:'POST',
+			dataType:'JSON',
+			data:{
+				accessToken:accessToken,
+				deviceSerial:'D35379600',
+				channelNo:1,
+				direction:direction,
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(){
+				console.log('指令发送失败')
+			}
 		})
 	})
 </script>

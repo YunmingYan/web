@@ -1,0 +1,581 @@
+body{
+	background: #0e131a;
+	color: #fff;
+}
+
+.all{
+	height: 100%;
+	overflow: hidden;
+	padding: 150px 0 30px 0;	
+}
+.width-box{
+	width: 1500px;
+	height: 100%;
+	width: 1500px;
+	margin: 0 auto;
+	position: relative;
+	
+}
+.item-box{
+	background: #191f28;
+	border-radius: 5px;
+	height: 100%;
+	padding-top: 60px;
+}
+.item-box>.item-title{
+	height: 60px;
+	padding-top: 10px;
+	margin-top: -60px;
+	line-height: 50px;
+	padding-left: 14px;
+	color: #aaa;
+	font-weight: 600;
+}
+.item-box>.item-title.tc{
+	text-align: center;
+	padding-left: 0; 
+}
+.item-con{
+	height: 100%;
+	position: relative;
+}
+
+.page-body{
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+.page-body
+{
+	transform: scale(0.8);
+	opacity: 0.25;
+	transition: all 0.5s;
+}
+.page-body.shown{
+	transform: scale(1);
+	opacity: 1;
+}
+.page-body.changing{
+	transform: scale(0.75);
+	opacity: 0.5;
+}
+
+
+
+/* 整体布局 */
+.top{
+	height: 70px;
+	margin-top: -150px;
+	background: #191f28;
+}
+
+.title{
+	height: 80px;
+}
+
+.main{
+	height: 100%;	
+}
+
+
+
+/* top */
+.top-box{	
+	padding: 0 190px 0 200px;
+}
+.logo{
+	float: left;
+	width: 200px;
+	margin-left: -200px;
+	padding: 22px 0;
+}
+.account{
+	float: right;
+	width: 190px;
+	margin-right: -190px;
+	text-align: right;
+	padding-top: 15px;
+}
+
+.menu{
+	text-align: center;
+	padding-top: 20px;
+}
+.menu>a{
+	display: inline-block;
+	height: 30px;
+	line-height: 20px;
+	padding: 5px;
+	margin: 0 15px;
+	color: #aaa;
+	font-size: 14px;
+	letter-spacing: 1px;
+	position: relative;
+	transition: all 0.5s;
+}
+.menu>a.active{
+	color: #fff;
+	font-size: 16px;	
+}
+.menu>a:before , .menu>a:after{
+	content: "";
+	position: absolute;
+	bottom: -20px;
+	width: 0;
+	border-top: solid 2px #ddd;	
+	transition: all 0.5s;	
+}
+.menu>a:before{
+	right: 50%
+}
+.menu>a:after{
+	left: 50%
+}
+.menu>a:hover{
+	color: #ddd;
+}
+.menu>a:hover:before , .menu>a:hover:after{
+	width: 50%;
+}
+
+/* account */
+.account-box{
+	cursor: pointer;
+}
+.account .face{
+	display: inline-block;
+	vertical-align: top;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	overflow: hidden;	
+	background: linear-gradient(to bottom right, #ffa6bd , #c167f2);
+	transition: all 0.4s;
+}
+.account .face>img{
+	width: 40px;
+	border-radius: 20px;
+	transition: all 0.4s;
+}
+.account .opation{
+	display: inline-block;
+	vertical-align: top;
+	width: 20px;
+	height: 20px;
+	position: relative;	
+	margin: 10px 0 0 6px;
+	color: #aaa;
+	transition: all 0.4s;
+}
+.account .opation:before,.account .opation:after{
+	content: "";
+	position: absolute;
+	display: inline-block;
+	border-top: solid 2px;
+	left: 5px;
+	box-sizing: border-box;
+}
+.account .opation:before{
+	width: 10px;	
+	height: 12px;
+	border-bottom: solid 2px;
+	top: 4px;
+}
+.account .opation:after{
+	width: 12px;
+	top: 9px;
+}
+.account-box:hover>.opation{
+	color: #fff;
+}
+.account-box:hover>.face{
+	padding: 2px;
+}
+.account-box:hover>.face>img{
+	width: 36px;
+}
+
+
+
+/* Title */
+.title-box{
+	padding: 25px 0;
+}
+.title .text{
+	font-size: 24px;
+	line-height: 30px;
+	color: #bbb;
+}
+.title .help{
+	display: block;	
+	width: 105px;
+	height: 30px;
+	border-radius: 3px;
+	border: solid 1px #aaa;
+	line-height: 28px;
+	text-align: center;
+	float: right;
+	color: #bbb;
+}
+
+
+/* ********************************************************************************************* */
+/* Page Style */
+
+/* default */
+.index-row1 , .index-row2{
+	display: flex;
+	margin-bottom: 30px;
+}
+.index-row1>.col4{
+	height: 300px;
+}
+.index-row1>.col4:first-child{
+	padding-right: 20px;
+}
+.index-row1>.col4:last-child{
+	padding-left: 20px;
+}
+.index-row1>.col4:nth-child(2){
+	padding: 0 10px;
+}
+
+.index-row2>.col6{
+	height: 400px;
+}
+.index-row2>.col6:first-child{
+	padding-right: 15px;
+}
+.index-row2>.col6:last-child{
+	padding-left: 15px;
+}
+.numbers{
+	text-align: center;
+}
+.numbers>span{
+	display: block;
+}
+.numbers .num-icon{
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	background: rgba(255,255,255,0.1);
+	margin:  25px auto;
+}
+.numbers .num-text{
+	color: #fff;
+	line-height: 40px;
+	font-size: 24px;
+}
+.svg-con{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+/* 雷达图 */
+.webs polygon
+{
+	fill: #423f6c;
+	fill-opacity: 0.5;
+	stroke: gray;
+	stroke-dasharray: 10 5;
+}
+.lines line
+{
+	stroke: gray;
+	stroke-dasharray: 10 5;
+}
+.texts text
+{
+	font-size: 1.2em;
+	fill: #ddd;
+}
+.areas polygon
+{
+	fill-opacity: 0.8;
+}
+
+.split
+{
+	stroke: #2c2a4f;
+	stroke-width:2;
+}
+.axis-y path
+{
+	display: none;
+}
+.axis-y text
+{
+	fill:#bbb;
+	font-size: 0.8em;
+}
+.axis-x text
+{
+	fill:#ccc;
+	font-size: 0.8em;
+}
+.axis-x text.xAxis-h
+{
+	fill:#fff;
+	font-size: 1em;
+}
+.hover-box
+{
+	fill: url(#rect1);
+	//fill-opacity: 0.2;
+}
+.overlay
+{
+	fill:none;
+	pointer-events: all;
+}
+.htext text
+{
+	text-anchor: middle;  /* 文本水平居中 */
+    dominant-baseline: middle; /* 文本垂直居中 */
+    fill: #ccc;
+    font-size: 1em;
+}
+.htext text.tnum
+{
+	font-size: 2em;
+	fill: #fff;
+}
+
+.polyline{
+	stroke-dasharray: 1000;             /* //设置虚线的间隔长度 */
+    stroke-dashoffset: 1000;             /* 设置线段偏移长度 */
+    animation: dash 2.5s ease-in-out forwards;
+}
+@keyframes dash {	
+	0%{
+		stroke-dashoffset: 1000;
+	}
+	100%{
+	    stroke-dashoffset: 0;
+	}
+}
+
+
+.pie-line{
+	opacity: .6;
+	stroke: #eee;
+	stroke-width: 2px;
+	fill: none;
+}
+.pie-line-point{
+	fill:#eee;
+	opacity: 0.6;
+}
+.pie-text{
+	fill:#eee;
+	font-family: "微软雅黑";
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+.pointer-line{
+	stroke: #4ed1b2;
+	stroke-width: 2px;
+}
+.board-number{
+	fill:#fff;
+	font-family: "微软雅黑";
+    font-size: 12px;
+}
+.show-number{
+	font-family: "微软雅黑";
+	font-size: 30px;
+	fill: #fff;
+	font-weight: bold;	
+}
+
+
+/* table */
+.table-row1 , .table-row2{
+	display: flex;	
+}
+.table-row1{
+	margin-bottom: 30px;
+}
+.table-row1>.col4{
+	height: 320px;
+}
+.table-row1>.col4:first-child{
+	padding-right: 20px;
+}
+.table-row1>.col4:last-child{
+	padding-left: 20px;
+}
+.table-row1>.col4:nth-child(2){
+	padding: 0 10px;
+}
+
+.table-row2>.col6{
+	height: 600px;
+}
+.table-row2>.col6:first-child{
+	padding-right: 15px;
+}
+.table-row2>.col6:last-child{
+	padding-left: 15px;
+}
+.table-row1 .item-con{
+	padding: 0 25px 20px 25px;
+}
+.item-paging .item-con{
+	padding-bottom: 20px;
+}
+.item-con.merge{
+	padding: 0 25px 20px 25px;
+}
+
+
+/* formstyle */
+.form-row1 , .form-row2{
+	display: flex;	
+}
+.form-row1{
+	margin-bottom: 30px;
+}
+.form-row1>.col4{
+	height: 320px;
+}
+.form-row1>.col4:first-child{
+	padding-right: 20px;
+}
+.form-row1>.col4:last-child{
+	padding-left: 20px;
+}
+.form-row1>.col4:nth-child(2){
+	padding: 0 10px;
+}
+
+.form-row2>.col4, .form-row2>.col8{
+	height: 600px;
+}
+.form-row2>.col4{
+	padding-right: 20px;
+}
+.form-row2>.col8{
+	padding-left: 10px;
+}
+
+.form-row1 .item-con, .form-row2 .item-con{
+	padding: 20px 25px;
+}
+.form-row1 .btn{
+	margin-right: 4px;
+}
+.form-row1 .btn:last-child{
+	margin-right: 0;
+}
+
+
+
+
+/* alert */
+.alert-row1 , .alert-row2{
+	display: flex;	
+}
+.alert-row1{
+	margin-bottom: 30px;
+}
+.alert-row1>.col4{
+	height: 320px;
+}
+.alert-row1>.col4:first-child{
+	padding-right: 20px;
+}
+.alert-row1>.col4:last-child{
+	padding-left: 20px;
+}
+.alert-row1>.col4:nth-child(2){
+	padding: 0 10px;
+}
+.alert-row2>.col6{
+	height: 450px;
+}
+.alert-row2>.col6:first-child{
+	padding-right: 15px;
+}
+.alert-row2>.col6:last-child{
+	padding-left: 15px;
+}
+
+.loading-row{
+	margin: 20px 0 20px 0;
+	display: flex;
+	justify-content: space-around;
+}
+.loading-item{
+	width: 140px;
+	height: 140px;
+	
+	position: relative;
+}
+.popup-btn{
+	padding: 20px 20px 0 20px;
+	text-align: center;
+}
+.popup-btn #popup-form{
+	margin-left: 20px;
+}
+.popup-form{
+	padding: 20px 20px 20px 40px;
+}
+.row-popup-btn{
+	text-align: center;
+	padding-top: 20px;
+}
+.row-popup-btn #btn-save{
+	margin-left: 25px;
+}
+
+.row-alert-btn{
+	padding-left: 78px;
+	padding-top: 20px;
+}
+.img-row{
+	padding: 0 30px;
+	margin-top: 30px;
+}
+
+.icon-row{
+	font-size: 24px;
+	text-align: center;
+	margin-bottom: 30px;
+    margin-top: 20px;
+}
+.icon-row>i{
+	margin-left: 20px;
+	cursor: pointer;
+}
+.icon-row>i:first-child{
+	margin-left: 0;
+}
+
+
+/* About */
+.about{
+	padding: 30px;
+}
+.about .a-row{
+	line-height: 34px;
+	margin-bottom: 15px;
+}
+.row-split{
+	height: 10px;
+}
+.about .a-row.rr{
+	text-align: right;
+	line-height: 20px;
+	margin-bottom: 0;
+	margin-top: 10px;
+}
+
