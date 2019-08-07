@@ -9,9 +9,8 @@
   <style>
 	  *{margin: 0;padding: 0;}
 	  .btn div:hover{background-color:rgba(63,240,87,1.00)}
-	  img{opacity: 0.3;width: 50px;height: 50px;pointer-events: none;/*禁用鼠标*/}
+	  img{opacity: 0.3;width: 50px;height: 50px;}
 	  img:hover{opacity: 1;}
-
   </style>
 </head>
 <script>
@@ -27,21 +26,23 @@
 		<div id="playWind" style="width: 750px; height: 500px;"></div>
 				
 				<div class="controlBtn" style="width: 150px;height: 150px;background-color: rgba(188,183,183,0.10);position: relative;left: 550px; top: -150px;border-radius: 75px;">
-					<div id="up" name="0" style="position: absolute;left: 50px;top:0px; ">
+					<button id="up" name="0" style="position: absolute;left: 50px;top:0px; background-color: rgba(188,183,183,0.00);border: none;">
 						<img src="../../../img/video/up.png" alt="">
-					</div>
+					</button>
 					<div style="width: 150px;height: 50px;display: flex;position: absolute;top: 50px;">
-						<div id="left" name="2">
+						<button id="left" name="2" style="background-color: rgba(188,183,183,0.00);border: none;">
 							<img src="../../../img/video/left.png" alt="">
-						</div>
-						<div id="stop" style="width: 50px;height: 50px;"></div>
-						<div id="right" name="3">
+						</button>
+						<button id="stop" style="background-color: rgba(188,183,183,0.00);border: none;">
+							<img src="../../../img/video/stop.png" alt="">
+						</button>
+						<button id="right" name="3" style="background-color: rgba(188,183,183,0.00);border: none;">
 							<img src="../../../img/video/right.png" alt="">
-						</div>
+						</button>
 					</div>
-					<div id="down" name="1" style="position: absolute;left: 50px;top: 100px;">
+					<button id="down" name="1" style="position: absolute;left: 50px;top: 100px;background-color: rgba(188,183,183,0.00);border: none;">
 						<img src="../../../img/video/down.png" alt="">
-					</div>
+					</button>
 				</div>
 		
 		<div class="btn" style="display: flex;position: relative;top: -150px;">
@@ -115,7 +116,7 @@ function handleError(e){
 		handleError: handleError,
 		handleSuccess: handleSuccess,
 	});
-		player.play();
+
 	
 </script>
 	
@@ -154,7 +155,29 @@ function handleError(e){
 		})
 	});
 	
-	$('#up,#down,#left,#right').mouseup(function(){
+	$('#up,#down').mouseup(function(){
+		var direction = $(this).attr('name')
+		
+		$.ajax({
+			url:'https://open.ys7.com/api/lapp/device/ptz/stop',
+			type:'POST',
+			dataType:'JSON',
+			data:{
+				accessToken:accessToken,
+				deviceSerial:'D35379600',
+				channelNo:1,
+				direction:direction,
+			},
+			success:function(data){
+				console.log(data)
+			},
+			error:function(){
+				console.log('指令发送失败')
+			}
+		})
+	})
+	
+	$('#stop').mousedown(function(){
 		var direction = $(this).attr('name')
 		
 		$.ajax({
