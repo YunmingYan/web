@@ -43,17 +43,25 @@
 //		alert(userName)
 //		alert(password)
 		$.ajax({
-			type:'',
-			url:'',
-			dataType:'JSOn',
+			type:'POST',
+			url:'http://192.168.1.118:8080/Greenhouse/admin/register',
+			dataType:'JSON',
 			data:{
-				
+				userName:userName,
+				password:password,
 			},
 			success:function(data){
-				document.location.href='index.html'
+				var code = data.code
+				var msg = data.msg
+				if(code==200){
+					alert(msg)
+					document.location.href='index.html'
+				}else{
+					alert(msg)
+				}
 			},
 			error:function(data){
-				alert('error');
+				console.log(data)
 			}
 		})
 		

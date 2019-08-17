@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.inP{width: 260px;height: 35px;margin-top: 10px; border-radius: 7px;background: none;padding-left: 5px;color: #ffffff;}
+		.contaner div{width: 300px;}
+	</style>
+</head>
+
+<body style="background-color: #1b2c34;">
+	<p id="screen" style="position: fixed;width: 100%;height: 100%;background-color:  rgba(131,131,131,0.50)">
+		<img style="position: fixed;top: 13%;left: 15%;" src="./img/index/screenChange.png" alt="" width="700px" height="700px">
+		<h1 id="screenText" style="position: fixed;top: 55%;left: 30%;font-size: 70px;">请横屏使用</h1>
+	</p>
+	<div style="max-width: 1350px;height: 1000px; background: url(img/1.jpg) no-repeat;margin: 0 auto;">
+		<div style="height: 100px;"></div>
+		<div class="contaner" style="width: 300px;margin: 0 auto;">
+			<div><img src="images/schoollogo.png" width="80px" height="80px" style="display: block; margin: 0 auto;" alt=""></div>
+			<div style="font-family: '隶书'; font-size: 30px;color: #ffffff;text-align: center;">智慧农业管理系统</div>
+			<div>
+				<input name="userName" type="username" placeholder="请输入用户名" class="inP" style="padding-left: 35px; background: url('img/user.png') no-repeat 3px;background-size: 27px 27px;">
+			</div>
+			<div>
+				<input id="password" name="password" type="password" placeholder="请输入密码" class="inP" style="padding-left: 35px; background: url('img/password.png') no-repeat 3px;background-size: 27px 27px;">
+			</div>
+			<button id="submint" type="submit" style="width: 300px; height: 40px;border-radius: 7px;background-color: #f04f10;margin-top: 15px;color: #ffffff;">Sign in</button>
+			<a style="margin: 5px; font-size: 14px;text-decoration: none;" href="sign.html">注册新账号</a>
+		</div>
+
+	</div>
+</body>
+	<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/address.js"></script>
+	<script type="text/javascript" src="js/cookieUtil.js"></script>
+</html>
+<script>
+	//检查用户设备
+//	navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) && (alert("请横屏使用"))
+	
+	//判断手机横竖屏状态：
+//setInterval(function(){
+//	if(window.orientation==180||window.orientation==0){
+////		alert("竖屏状态！")
+//		alert("请将手机横屏使用")
+//	}
+//	if(window.orientation==90||window.orientation==-90){
+////		alert("横屏状态！")
+//	}
+//},2000)
+	
+
+
+(function(){
+//开始时检测屏幕是否竖屏
+	if(window.orientation==0){
+//		alert("竖屏状态！")
+
+	}
+	else{
+		$('#screen').hide()
+		$('#screenText').hide()
+	}
+	
+//旋转屏幕触发事件	
+	var init = function(){
+		var updateOrientation = function(){//方向改变执行的函数
+			var orientation = window.orientation;
+		switch(orientation){
+			case 90:
+			case -90:
+			orientation = 'landscape'; //这里是横屏
+			break;
+			default:
+			orientation = 'portrait'; //这里是竖屏
+			break;
+		}
+//html根据不同的旋转状态，加上不同的class，横屏加上landscape，竖屏
+//加上portrait
+			document.body.parentNode.setAttribute('class',orientation);
+		};
+// 每次旋转，调用这个事件。
+		window.addEventListener('orientationchange',updateOrientation,false);
+// 事件的初始化
+		updateOrientation();
+	};
+	window.addEventListener('DOMContentLoaded',init,false);
+})();
+	
+	window.addEventListener('orientationchange',function(){
+//		alert(window.orientation); //这里可以根据orientation做相应的处理
+		var state = window.orientation
+//		alert(state)
+		if(state == 0){
+//			alert("竖屏")
+			$('#screen').show()
+			$('#screenText').show()
+
+		}
+		else if(state == 90 || state == -90){
+//			alert("请横屏使用")
+			$('#screen').hide()
+			$('#screenText').hide()
+		}
+	},false);
+
+//	//页面加载时调用
+//	$(function(){
+//		orient();
+//	});
+//	//用户变化屏幕方向时调用
+//	$(window).bind( 'orientationchange', function(e){
+//		orient();
+//	});
+
+</script>
+<script>
+	var user = $("input[name=userName]");
+	var pass = $("input[name=password]");
+//	var userName = user.val();
+//	var password = pass.val();
+//	console.log(userName)
+//	console.log(password)
+
+	$('#submint').click(function(){
+		var userName= user.val();
+		var password = pass.val();
+//		console.log(userName)
+//		console.log(password)
+		if(user.val() == '' || pass.val() =='')
+			{
+				alert("用户名或密码不能为空~");
+			}
+//		else if(userName == "admin" && password =="admin"){
+//			window.location.href="head.html"
+//
+//		}
+		else{
+			$.ajax({
+				type:'POST',
+				url:'./src/cn/cxj/admin/LoginG.java',
+				dataType:'JSON',
+				header:{
+					
+				},
+				data:{
+					userName:userName,
+					password:password,
+				},
+				success:function(data){
+//					alert('success')
+//					console.log(data)
+					var code = data.code
+					var msg = data.msg
+					if(code==400){
+						alert(msg)
+					  }
+					else{
+//						console.log(data)
+						if(code==200){
+							console.log(data);
+//							var userId = data.data.userId
+//							console.log("userId："+ userId)
+//							cookieUtil.unset("userId")
+//							cookieUtil.set("userId",userId)
+							document.location.href="head.html"
+						   }
+					}
+
+				},
+				error:function(){
+					alert('error')
+				}
+			});
+
+		}
+
+	});
+
+</script>
