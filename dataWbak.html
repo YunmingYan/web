@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数据分析</title>
+	<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+	<script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+	<!--相对湿度-->
+	<script src="https://code.highcharts.com.cn/highcharts/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com.cn/highcharts/modules/solid-gauge.js"></script>
+	<style>
+		*{margin: 0;padding: 0;}
+		.width{width: 1138px}
+		.margin_c{margin: 0 auto;}
+		.container{margin: 0 auto;width: 1138px;display: ;}
+		.flex{display: flex}
+		.text_a_c{text-align: center}
+		.max_w{max-width: 1138px}
+		.min_w{min-width: 1138px}
+		.display_b{display: block}
+		
+		.cycle{border-radius: 50%}
+		.cycle_data{width: 500px;margin: 0 auto;}
+		.cycle_text{text-align: center;line-height: 170px;font-size: 50px;}
+		.nav{margin-left: 100px;}
+		.nav a{text-decoration: none;color: black;line-height: 70px;margin: 0 0 0 30px}
+		.nav a:hover{color: red}
+		.dataText{color: #FFF;font-size: 20px;line-height: 70px;padding-left: 100px;}
+		.dataText4{color: #FFF;font-size: 20px;line-height: 70px;padding-left: 80px;}
+		.data div:hover{background-color: black;}
+	</style>
+</head>
+
+<body>
+	<div class="container" style="">
+		<div class="user flex" style="width: 1138px;height: 70px;background-color: rgba(173,173,173,1.00)">
+			<div style="width: 70px;height: 70px;margin: 0 80px">
+				<img src="./img/logo-icon.png" alt="" width="70px" height="70px">
+				
+			</div>
+			<div style="height: 70px; margin-left: 10px;font-size: 30px;line-height: 70px;color: #2196f3;">
+				智农物联团队
+			</div>
+			<div class="nav" style="height: 70px;">
+				<a href="head.html">主页</a>
+				<a href="./SDK/EZ/demo/demo-monitor.html">视频</a>
+				<a href="dataW.html">数据</a>
+				<a href="#">切换用户</a>
+				<a href="index.html">退出</a>
+			</div>
+<!--
+			<div style="height: 100px;">
+				<div>
+				<img class="cycle" src="./img/face.png" alt="" width="50px" height="50px" style="display: block;margin: 25px ;">
+				</div>
+				<div>严允明</div>
+			</div>
+-->
+		</div>
+		
+		
+		
+		<div class="data" style="width: 250px;height: 640px;background-color: #2f2b2b;">
+			
+			<a href="head.html" style="color: #FFF;text-decoration: none;width: 250px;height: 100px;display: block;font-size: 20px;line-height: 100px;text-align: center;"><</a>
+
+			<div id="tempBtn" class="data">
+			<a href="" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			温度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+			</a>
+			</div>
+			<div id="wetBtn" class="data" >
+			<a href="#" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			湿度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+			</a>
+			</div>
+			<div id="weatherBtn" class="data">
+			<a href="#" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			天气&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+			</a>
+			</div>
+			<div class="data" >
+			<a href="#" style="color: #FFF;text-decoration: none;width: 246px;height: 70px;display: block;font-size: 20px;line-height: 70px;text-align: center;border: 2px solid #3a3636;">
+			光照强度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;>
+			</a>
+			</div>
+<!--
+			<div class="data dataText" style="width: 146px;height: 70px;border: 2px solid #3a3636;">
+			
+			</div>			
+-->
+		</div>
+		
+		<div class="head" style="margin: -640px 0 0 250px;width: 888px;height: 100px; background-color: #1c1c1c;">
+		
+		</div>
+		
+<!--
+		<div class="cycle_data margin_c">
+			<div class="flex" style="width:500px">
+				<div class="cycle" style="width: 200px;height: 200px; background:linear-gradient(to bottom right,white,#1494aa)">
+					<div class="cycle cycle_text" style="width: 170px;height: 170px; background:#FFF;margin: 0 auto;margin-top: 15px">
+						0
+					</div>
+				</div>
+				<div style="width: 100px"></div>
+				<div width="300px" class="cycle" style="width: 200px;height: 200px; background:linear-gradient(to bottom right,white,#1494aa)">
+					<div class="cycle cycle_text" style="width: 170px;height: 170px; background:#FFF;margin: 0 auto;margin-top: 15px">
+						0
+					</div>
+				</div>
+			</div>
+		</div>		
+-->
+		<div class="box" style="width: 884px;height: 538px;margin-left: 250px; border: 2px solid black">
+<!--温度-->
+			<div id="temp" class="hightChart" style="display: block;">
+				<div id="container" style="min-width:400px;height:400px"></div>
+			</div>
+<!--相对湿度-->
+			<div id="wet" style="width: 800px; height: 300px; margin: 100px auto;display: none;">
+				<div id="container-speed" style="width: 400px; height: 250px; float: left"></div>
+				<div id="container-rpm" style="width: 400px; height: 250px; float: left"></div>
+			</div>
+<!--天气-->
+			<div id="weather" style="display: none;width: 600px;margin: 0 auto;">
+				<iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tw&skin=pitaya" frameborder="0" width="600" height="500" allowtransparency="true"></iframe>
+			</div>
+<!--数字图表-->
+			<div class="cycle_data margin_c" style="display: none;">
+				<div class="flex" style="width:500px">
+					<div class="cycle" style="width: 200px;height: 200px; background:linear-gradient(to bottom right,white,#1494aa)">
+						<div class="cycle cycle_text" style="width: 170px;height: 170px; background:#FFF;margin: 0 auto;margin-top: 15px">
+							0
+						</div>
+					</div>
+					<div style="width: 100px"></div>
+					<div width="300px" class="cycle" style="width: 200px;height: 200px; background:linear-gradient(to bottom right,white,#1494aa)">
+						<div class="cycle cycle_text" style="width: 170px;height: 170px; background:#FFF;margin: 0 auto;margin-top: 15px">
+							0
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+			
+	</div>
+</body>
+</html>
+<script>
+//温度图表
+tempf();
+function tempf(){
+	var chart = null;
+	chart = Highcharts.chart('container', {
+		chart: {
+			zoomType: 'x'
+		},
+		title: {
+			text: '温度走势图'
+		},
+		subtitle: {
+			text: document.ontouchstart === undefined ?
+			'鼠标拖动可以进行缩放' : '手势操作进行缩放'
+		},
+		xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {
+				millisecond: '%H:%M:%S.%L',
+				second: '%H:%M:%S',
+				minute: '%H:%M',
+				hour: '%H:%M',
+				day: '%m-%d',
+				week: '%m-%d',
+				month: '%Y-%m',
+				year: '%Y'
+			}
+		},
+		tooltip: {
+			dateTimeLabelFormats: {
+				millisecond: '%H:%M:%S.%L',
+				second: '%H:%M:%S',
+				minute: '%H:%M',
+				hour: '%H:%M',
+				day: '%Y-%m-%d',
+				week: '%m-%d',
+				month: '%Y-%m',
+				year: '%Y'
+			}
+		},
+		yAxis: {
+			title: {
+				text: ''
+			}
+		},
+		legend: {
+			enabled: false
+		},
+		plotOptions: {
+			area: {
+				fillColor: {
+					linearGradient: {
+						x1: 0,
+						y1: 0,
+						x2: 0,
+						y2: 1
+					},
+					stops: [
+						[0, Highcharts.getOptions().colors[0]],
+						[1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+					]
+				},
+				marker: {
+					radius: 2
+				},
+				lineWidth: 1,
+				states: {
+					hover: {
+						lineWidth: 1
+					}
+				},
+				threshold: null
+			}
+		},
+		series: [{
+			type: 'area',
+			name: '当前温度℃',
+			data: [27.3,27.4,27.4,27.5,27.6,27.7,27.4,28.3,28.4,28.8,28.4,28.6,27.8,30.0,29.5,27.4,27.4,27.7,27.6,27.4,27.4,27.4,27.5,27.7]
+		}]
+	});
+};
+</script>
+	
+
+<script>
+//湿度
+// 公共配置
+function wetf(){
+var chart = null;
+Highcharts.setOptions({
+	chart: {
+		type: 'solidgauge'
+	},
+	title: null,
+	pane: {
+		center: ['50%', '85%'],
+		size: '140%',
+		startAngle: -90,
+		endAngle: 90,
+		background: {
+			backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+			innerRadius: '60%',
+			outerRadius: '100%',
+			shape: 'arc'
+		}
+	},
+	tooltip: {
+		enabled: false
+	},
+	yAxis: {
+		stops: [
+			[0.1, '#55BF3B'], // green
+			[0.5, '#DDDF0D'], // yellow
+			[0.9, '#DF5353'] // red
+		],
+		lineWidth: 0,
+		minorTickInterval: null,
+		tickPixelInterval: 400,
+		tickWidth: 0,
+		title: {
+			y: -90,
+			
+		},
+		labels: {
+			y: 16
+		}
+	},
+	plotOptions: {
+		solidgauge: {
+			dataLabels: {
+				y: 5,
+				borderWidth: 0,
+				useHTML: true
+			}
+		}
+	}
+});
+// 相对湿度
+var chart1 = Highcharts.chart('container-speed', {
+	yAxis: {
+		min: 0,
+		max: 100,
+		title: {
+			text: '相对湿度'
+			
+		}
+	},
+	credits: {
+		enabled: false
+	},
+	series: [{
+		name: '相对湿度',
+		data: [70],
+		dataLabels: {
+			format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+			((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
+			'<span style="font-size:12px;color:silver">百分比%</span></div>'
+		},
+		tooltip: {
+			valueSuffix: '百分比%'
+		}
+	}]
+});
+// 转土壤湿度
+var chart2 = Highcharts.chart('container-rpm', {
+	yAxis: {
+		min: 0,
+		max: 100,
+		title: {
+			text: '土壤湿度'
+		}
+	},
+	series: [{
+		name: '土壤湿度',
+		data: [43],
+		dataLabels: {
+			format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+			((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}</span><br/>' +
+			'<span style="font-size:12px;color:silver">%( m3/m3)</span></div>'
+		},
+		tooltip: {
+			valueSuffix: ' revolutions/min'
+		}
+	}]
+});
+// 定时刷新数据
+setInterval(function () {
+	var point,
+		newVal,
+		inc;
+	if (chart1) {
+		point = chart1.series[0].points[0];
+		inc = 0;
+		newVal = point.y + inc;
+		if (newVal < 0 || newVal > 200) {
+			newVal = point.y - inc;
+		}
+		point.update(newVal);
+	}
+	if (chart2) {
+		point = chart2.series[0].points[0];
+		inc = 0;
+		newVal = point.y + inc;
+		if (newVal < 0 || newVal > 5) {
+			newVal = point.y - inc;
+		}
+		point.update(newVal);
+	}
+}, 2000);
+};
+</script>
+<script>
+	var temp = document.getElementById('temp');
+	var wet = document.getElementById('wet');
+	var weather = document.getElementById('weather');
+	$('#tempBtn').click(function(){
+//		temp.style.cssText="display:block;"
+//		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: none;"
+//		weather.style.cssText="display: none;width: 600px;margin: 0 auto;"
+//		tempf();
+	});
+	$('#wetBtn').click(function(){
+		temp.style.cssText="display:none;"
+		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: block;"
+		weather.style.cssText="display: none;width: 600px;margin: 0 auto;"
+		wetf();
+	});
+	$('#weatherBtn').click(function(){
+		temp.style.cssText="display:none;"
+		wet.style.cssText="width: 800px; height: 300px; margin: 100px auto;display: none;"
+		weather.style.cssText="display: block;width: 600px;margin: 0 auto;"
+	});
+</script>

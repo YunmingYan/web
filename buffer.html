@@ -1,0 +1,27 @@
+<!--
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+ <img src="./gif/index/buffer.gif" width="400px" height="200px" alt="#" />
+ <h1 class="title">${title }</h1>
+ <p class="info"><span class="num">3</span> ${info} </p >
+ 
+ <script>
+  var num = 3
+  setInterval(function(){  //定时器
+   num--;
+   document.querySelector('.num').innerHTML = num;
+   if(num==0){
+//    location.href="head.html";//重定向
+   }
+  },1000)
+ </script>
+</body>
+</html>
