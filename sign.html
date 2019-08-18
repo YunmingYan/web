@@ -2,68 +2,105 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-<!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+<title>register</title>
 	<script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
-<title>注册账号</title>
+	<script src="js/jquery.mockjax.js"></script>
+	<link rel="stylesheet" href="./css/index/styles_index.css">
 	<style>
-		.cycle{border-radius: 50%}
-		.container{margin: 0 auto;}
+		*{margin: 0;padding: 0;}
+		body{background-color: rgba(200,200,200,0.70);}
+		.container{margin: 0 auto;margin-top: 70px;width: 400px;display: block;background-color: rgba(37,52,92,0.80);height: 500px;background: url("./img/index/Starry_index.jpg");border-radius: 3px;}
+		span{display: block;margin-left: 60px;font-size: 12px;color: rgba(170,170,170,1.00)}
+		input{width: 300px;height: 30px;background-color: transparent;border-radius: 15px;margin: 5px 50px;color: #FFF;outline-style:none;padding-left: 5px;}
+		p{ button:3px;}
+		a{color: #FFF;position: relative;top: 5px;left: 10px;width: 20px;text-decoration: none;}
+		a:hover{color: blue;}
+	
 	</style>
 </head>
 
 <body>
-	<div class="container" style="background-color: #fbfbfb">
-		<div class="container" style="width: 350px;height: 300px;border: 1px solid rgba(0,0,0,0.10);background-color: ;margin-top: 100px;">
-			<div class="container" style="width: 250px;margin: 100px auto 0; background-color: #FFFFFF">
-				<a href="index.html"><img style="display: block;margin-top: -125px;" class="container" src="./img/logo-icon.png" alt="" width="60px"></a>
-
-				<div class="container" width="">
-					<div style="text-align: center;color: rgba(124,168,231,1.00);font-size: 20px;">Sign in to continue</div>
-					<div class="container" width="500px" style="padding: 5px;text-align: ;">
-						<div>账号</div>
-						<input id="user" name="userName" type="text" style="width: 230px;height: 23px;border-radius: 3px;margin-top: 5px;padding-left: 5px;">
-						<div>密码</div>
-						<input id="pass" name="password" type="password" style="width: 230px;height: 23px;border-radius: 3px;margin-top: 5px;padding-left: 5px;"><br/>
-					</div>
-					<button id="btn" type="submit" style="margin: 5px;width: 50px;height: 25px;border-radius: 3px;background-color: #44a0b3;color: #FFFFFF" onclick="">确定</button>
-				</div>
-			</div>
+	<div class="container" style="display: block;">
+		<a href="index.html"><<</a>
+		<p style="font-size: 30px;color: #FFF;display: block;text-align: center;position: relative;top: 50px;">Sign Up</p>
+		<span style="margin-top: 80px;">请输入账号</span>
+		<input name="userName" type="text">
+		<span>请输入密码</span>
+		<input name="password" type="password">
+		<span>请再次输入密码</span>
+		<input name="checkPassword" type="password">
+		<div style="display: flex;margin: 5px 0 0 5px;">
+			<input id="check" type="checkbox" value="90" style="width:15px;height: 15px;margin:0 0 0 50px;"><p style="width: 200px;font-size: 12px;margin:-2px 0 0 5px;">Keep me Sign in</p>
 		</div>
+		<input onclick="btn()" type="button" value="确定" style="margin-top: 20px;background-color: #1161ee;height: 35px;">
 	</div>
 </body>
 </html>
 <script>
-	var user = $("input[name=userName]");
-	var pass = $("input[name=password]");
-	$('#btn').click(function (){
-//		alert('ok')
-		var userName = user.val();
-		var password = pass.val();
-//		alert(userName)
-//		alert(password)
-		$.ajax({
-			type:'POST',
-			url:'http://192.168.1.118:8080/Greenhouse/admin/register',
-			dataType:'JSON',
-			data:{
-				userName:userName,
-				password:password,
-			},
-			success:function(data){
-				var code = data.code
-				var msg = data.msg
-				if(code==200){
-					alert(msg)
-					document.location.href='index.html'
-				}else{
-					alert(msg)
-				}
-			},
-			error:function(data){
-				console.log(data)
-			}
-		})
+	var ajaxmockajx = 1;//启用虚拟Ajax
+	var url = 'http://192.168.1.118:8080/Greenhouse/admin/register'
+	
+	function btn(){
+//		alert('onclick')
+		var userName = $("input[name=userName]").val()
+		var password = $("input[name=password]").val()
+		var checkPassword = $("input[name=checkPassword]").val()
+		var checked = $('#check').prop('checked');
+//		console.log(userName)
 		
-	})
+		//非空验证
+		if(userName == ''){
+			alert('用户名不能为空')
+		}else if(password == ''){
+			alert('密码不能为空')
+		}else if(checkPassword == ''){
+			alert('请再次输入密码')
+		}else if(password != checkPassword){
+			alert('输入的密码不一致')
+		}else{
+			
+			if(ajaxmockajx == 1){
+				if(userName == 'xiaoming' && password == '123456'){
+					url = 'register/success'
+				}else{
+					url = 'register/false'
+				}
+			}
+			
+				//ajax验证
+				$.ajax({
+					url:url,
+					type:'JSON',
+					data:{
+						userName:userName,
+						password:password,
+					},
+					success:function(data){
+						var code = data.code
+						var msg = data.msg
+						if(code == 200){
+							alert(msg)
+							if(checked == true){
+								location.href='index.html'
+							}
+						}else{
+							alert(msg)
+						}
+					}
+				})
+			
+		}
+	}
+
+	
+	if(ajaxmockajx == 1){
+		$.mockjax({
+			url:'register/success',
+			responseText:{"code":200,"msg":"注册成功!"}
+		})
+		$.mockjax({
+			url:'register/false',
+			responseText:{"code":400,"msg":"注册失败！该账号已存在！"}
+		})
+	}
 </script>
